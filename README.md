@@ -1,1 +1,1 @@
-# structure
+# Structure - Your Compliance Copilot 
