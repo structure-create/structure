@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Define fonts */
+@font-face {
+  font-family: 'GeorgiaPro';
+  src: url('/fonts/georgiapro.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNova';
+  src: url('/fonts/proximanova.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Define variables */
+@layer base {
+  :root {
+    /* Background color */
+    --background: #FFFFFF; 
+    /* Text color */
+    --foreground: #000000;
+    /* Box color */
+    --card: #F4F4F6;
+    /* Button, Logo color */
+    --accent: #0F2251;
+    /* Placeholder text */
+    --placeholder: #B8B8B8;
+    /* Border color */
+    --border: #C1C1C1;
+
+    /* Hover Colors */
+    --hovaccent: #121A30;
+  }
+
+  h1 {
+    font-family: 'GeorgiaPro', serif;
+    font-weight: bold;
+    font-size: 96px;
+    color: var(--foreground);
+  }
+
+  h2 {
+    font-family: 'GeorgiaPro', serif;
+    font-weight: bold;
+    font-size: 48px;
+    color: var(--foreground); 
+  }
+
+  h3 {
+    font-family: 'ProximaNova', serif;
+    font-weight: normal;
+    font-size: 36px;
+  }
+
+  p {
+    font-family: 'ProximaNova', serif;
+    font-weight: 400px;
+    font-size: 24px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    @apply bg-background text-foreground;
+  }
+}
