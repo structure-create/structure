@@ -40,7 +40,7 @@ export default function Home() {
                 </div>
 
                 <Link href="/demo">
-                    <p className="mt-8 w-fit inline-block bg-[var(--accent)] text-[#0F2251] text-[var(--background)] font-semibold text-lg px-6 py-3 rounded-md hover:bg-[var(--hovaccent)] transition">
+                    <p className="mt-8 w-fit inline-block bg-[var(--accent)] text-[#CD6026] text-[var(--background)] font-semibold text-lg px-6 py-3 rounded-md hover:bg-[var(--hovaccent)] transition">
                     Try a Demo
                     </p>
                 </Link>
