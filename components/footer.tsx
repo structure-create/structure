@@ -16,7 +16,7 @@ export function Footer() {
           </Link>
 
           {/* Social Icons */}
-          <div className="flex gap-4 mt-[6px]">
+          <div className="flex gap-4 mt-[4px]">
             <Link href="mailto:structure.create@gmail.com" aria-label="Email">
               <img
                 src="/svgs/mail.svg"
