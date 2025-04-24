@@ -147,11 +147,11 @@ export function UploadPermit() {
             <CardContent className="p-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="flex flex-col items-center justify-center space-y-4 py-6">
-                  <div className="rounded-full bg-navy-50 p-4">
-                    <FileText className="h-8 w-8 text-navy-700" />
+                  <div className="rounded-full bg-orange-50 p-4">
+                    <FileText className="h-8 w-8 text-orange-700" />
                   </div>
                   <div className="space-y-2 text-center">
-                    <h3 className="text-lg font-semibold text-navy-900">Upload your PDF</h3>
+                    <h3 className="text-lg font-semibold text-orange-900">Upload your PDF</h3>
                     <p className="text-sm text-gray-500">
                       Drag and drop or click to upload your construction permit PDF
                     </p>
@@ -186,7 +186,7 @@ export function UploadPermit() {
                   <div className="flex gap-4">
                     <Button
                       type="submit"
-                      className="bg-navy-700 hover:bg-navy-800 text-white"
+                      className="bg-orange-700 hover:bg-orange-800 text-white"
                       disabled={!file || isUploading}
                     >
                       {isUploading ? (
