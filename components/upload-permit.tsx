@@ -59,7 +59,7 @@ export function UploadPermit() {
       const text = await extractTextFromPDF(file)
 
       // Send API call
-      const response = await fetch("/api/perplexity", {
+      const response = await fetch("/api/gemini", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
