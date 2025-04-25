@@ -18,7 +18,7 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body><CognitoProvider>{children}</CognitoProvider></body>
+      <body className="bg-[#FAF9F6]"><CognitoProvider>{children}</CognitoProvider></body>
     </html>
   )
 }

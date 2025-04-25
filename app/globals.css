@@ -10,15 +10,14 @@
 
 /* Define fonts */
 @font-face {
-  font-family: 'GeorgiaPro';
-  src: url('/fonts/georgiapro.ttf') format('truetype');
-  font-weight: bold;
+  font-family: 'PPNeueMontreal-Medium';
+  src: url('/fonts/PPNeueMontreal-Medium.otf') format('opentype'); 
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'ProximaNova';
-  src: url('/fonts/proximanova.ttf') format('truetype');
+  font-family: 'PPNeueMontreal-Thin';
+  src: url('/fonts/PPNeueMontreal-Thin.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
@@ -27,13 +26,15 @@
 @layer base {
   :root {
     /* Background color */
-    --background: #FFFFFF; 
+    --background: #FAF9F6; 
     /* Text color */
     --foreground: #000000;
     /* Box color */
     --card: #F4F4F6;
     /* Button, Logo color */
     --accent: #CD6026;
+    /* light logo color */
+    --lightaccent: #FDE0CA;
     /* Placeholder text */
     --placeholder: #B8B8B8;
     /* Border color */
@@ -42,29 +43,31 @@
     /* Hover Colors */
     --hovaccent: #A14B1D;
   }
-
+  
   h1 {
-    font-family: 'GeorgiaPro', serif;
-    font-weight: bold;
+    color: #333;
+    font-family: "PP Neue Montreal";
     font-size: 96px;
-    color: var(--foreground);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100px;
   }
 
   h2 {
-    font-family: 'GeorgiaPro', serif;
+    font-family: 'PPNeueMontreal-Medium';
     font-weight: bold;
     font-size: 48px;
     color: var(--foreground); 
   }
 
   h3 {
-    font-family: 'ProximaNova', serif;
+    font-family: 'PPNeueMontreal-Thin', serif;
     font-weight: normal;
     font-size: 36px;
   }
 
   p {
-    font-family: 'ProximaNova', serif;
+    font-family: 'PPNeueMontreal-Thin', serif;
     font-weight: 400px;
     font-size: 24px;
   }
@@ -75,7 +78,14 @@
     @apply border-border;
   }
   body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'PPNeueMontreal-Thin', serif;
     @apply bg-background text-foreground;
   }
+}
+
+@layer utilities {
+  .row-start-1 { grid-row-start: 1; }
+  .row-start-2 { grid-row-start: 2; }
+  .col-start-1 { grid-column-start: 1; }
+  .col-start-2 { grid-column-start: 2; }
 }
