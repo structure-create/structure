@@ -43,9 +43,9 @@ export function Footer() {
         </div>
 
         {/* Right block */}
-        <div className="text-sm flex flex-col items-end gap-6 text-right">
-        <p className={`${myFont.className} text-md font-bold`}>For architects, by innovators</p>
-          <p className= "text-md">
+        <div className="text-sm flex flex-col items-end gap-6 text-right ">
+        <p className="font-bold text-white">For architects, by innovators</p>
+          <p className="text-white">
             Built in Los Angeles, California
           </p>
         </div>
@@ -58,7 +58,7 @@ export function Footer() {
         `}>
           <p className="text-md"></p>
           <div className="text-sm flex flex-col items-end gap-6 text-right">
-            <p className="text-md">© {new Date().getFullYear()} Structure</p>
+            <p className="text-md text-white">© {new Date().getFullYear()} Structure</p>
           </div>
         </div>
     </footer>
