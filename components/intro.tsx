@@ -24,9 +24,9 @@ export function Intro() {
           <p className="text-4xl md:text-8xl leading-tight pt-[40px]">
             Drawings to approvals. Faster.
           </p>
-          <p className="mt-4 text-4xl text-gray-700">
+          <h3 className="mt-4">
             Quality control and compliance tool<br></br>for architects.
-          </p>
+          </h3>
           <div className="mt-6 flex flex-wrap gap-4">
             <Link href="/demo">
               <p className="px-6 py-3 bg-[#B35A2D] hover:bg-[#9A4021] text-white rounded-md">
@@ -62,10 +62,10 @@ export function Intro() {
         <p className="text-7xl">
             Construction moves <br /> fast, permits don’t.
         </p>
-        <p className="text-3xl max-w-2xl">
+        <h4 className="max-w-2xl">
             Structure highlights code violations, grades your drawings on compliance,
             and allows teammates to leave comments and suggestions.
-        </p>
+        </h4>
     </div>
     </section>
   )
