@@ -13,8 +13,14 @@ export function Header() {
   };
 
   return (
-    <header className="flex items-center justify-between px-6 py-5 pb-10 bg-[var(--background)] shadow-sm">
+    <header className="flex items-center justify-between px-6 py-8 shadow-sm bg-[var(--background)] border-b border-[var(--accent)]">
       {/* Logo */}
+      <div className="flex items-center gap-6">
+      <img
+        src="/svgs/menu.svg"
+        alt="Menu"
+        className="h-5 w-auto"
+      />
       <Link href="/">
         <img
           src="/svgs/structure_word_logo.svg"
@@ -22,27 +28,37 @@ export function Header() {
           className="h-10 w-auto"
         />
       </Link>
+    </div>
 
       {/* Buttons */}
-      <div className="flex items-center space-x-4">
-        <Link href="/demo">
-          <p className="bg-[var(--accent)] text-[var(--background)] text-sm px-5 py-2 rounded-full font-semibold hover:bg-[var(--hovaccent)] transition">
-            TRY A DEMO
-          </p>
+      <div className="flex items-center space-x-1">
+        <Link href="/contactus">
+        <button
+            className="flex items-center space-x-2
+                      bg-[var(--background)] text-[#CD6026]
+                      text-sm px-5 py-2 rounded-full
+                      hover:bg-[var(--card)] transition
+                      font-semibold"
+          >
+            CONTACT US
+          </button>
         </Link>
 
-        {/* 🚀 Replaces Link with direct redirect */}
-        <button
-          onClick={redirectToCognitoLogin}
-          className="bg-[var(--accent)] text-[var(--background)] text-sm px-5 py-2 rounded-full font-semibold hover:bg-[var(--hovaccent)] transition"
-        >
-          LOGIN
-        </button>
-
-        <Link href="/#contact">
-          <p className="bg-[var(--background)] text-[var(--foreground)] text-sm px-5 py-2 rounded-full font-semibold hover:bg-[var(--card)] transition">
-            CONTACT US
-          </p>
+        <Link href="/demo">
+          <button
+            className="flex items-center space-x-2
+                      bg-[var(--background)] text-[#CD6026]
+                      text-sm px-5 py-2 rounded-full
+                      hover:bg-[var(--card)] transition
+                      font-semibold"
+          >
+            <span>TRY A DEMO</span>
+            <img
+              src="/svgs/arrow.svg"
+              alt="→"
+              className="h-4 w-auto"
+            />
+          </button>
         </Link>
       </div>
     </header>

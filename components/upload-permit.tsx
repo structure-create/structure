@@ -129,11 +129,11 @@ export function UploadPermit() {
   }
 
   return (
-    <section id="upload-permit" className="w-full py-12 md:py-24 lg:py-32">
+    <section id="upload-permit" className="w-full py-12 md:py-24 lg:py-32 bg-[var(--background)]">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="flex flex-col items-center space-y-4 text-center mb-12">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-navy-900">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-navy-900">
               Upload Your Construction Permit
             </h2>
             <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
