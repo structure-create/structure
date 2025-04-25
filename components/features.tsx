@@ -12,7 +12,7 @@ const FadeIn = dynamic(() => import("@/components/fadein"), {
 export function Features() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 overflow-visible">
-      <div className="grid grid-cols-2 grid-rows-3 gap-x-16 gap-y-40 items-start overflow-visible relative">
+      <div className="grid grid-cols-2 grid-rows-3 gap-x-16 gap-y-20 items-start overflow-visible relative">
         {/* 1) Top-left */}
         <div className="col-start-1 row-start-1 relative z-20 md:-mr-16 lg:-mr-24 flex items-center space-x-6">
           <img

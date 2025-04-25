@@ -60,6 +60,13 @@
     font-size: 36px;
   }
 
+  h4 {
+    color: #333;
+    font-family: 'PPNeueMontreal-Medium', serif;
+    font-weight: normal;
+    font-size: 32px;
+  }
+
   p {
     color: #333;
     font-family: 'PPNeueMontreal-Medium', serif;
