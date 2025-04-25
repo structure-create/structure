@@ -16,11 +16,6 @@ export function Header() {
     <header className="flex items-center justify-between px-6 py-8 shadow-sm bg-[var(--background)] border-b border-[var(--accent)]">
       {/* Logo */}
       <div className="flex items-center gap-6">
-      <img
-        src="/svgs/menu.svg"
-        alt="Menu"
-        className="h-5 w-auto"
-      />
       <Link href="/">
         <img
           src="/svgs/structure_word_logo.svg"

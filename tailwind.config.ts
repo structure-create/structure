@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        montreal: ["PPNeueMontreal-Thin", "serif"],
+        montreal: ["PPNeueMontreal-Medium", "serif"],
         montrealMedium: ["PPNeueMontreal-Medium", "serif"],
       },
       colors: {
