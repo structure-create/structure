@@ -47,19 +47,21 @@
   }
 
   h2 {
+    color: #333;
     font-family: 'PPNeueMontreal-Medium';
-    font-weight: bold;
     font-size: 48px;
     color: var(--foreground); 
   }
 
   h3 {
+    color: #333;
     font-family: 'PPNeueMontreal-Medium', serif;
     font-weight: normal;
     font-size: 36px;
   }
 
   p {
+    color: #333;
     font-family: 'PPNeueMontreal-Medium', serif;
     font-weight: 400px;
     font-size: 24px;
