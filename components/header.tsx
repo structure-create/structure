@@ -32,8 +32,7 @@ export function Header() {
             className="flex items-center space-x-2
                       bg-[var(--background)] text-[#CD6026]
                       text-sm px-5 py-2 rounded-full
-                      hover:bg-[var(--card)] transition
-                      font-semibold"
+                      hover:bg-[var(--card)] transition"
           >
             CONTACT US
           </button>
@@ -44,8 +43,7 @@ export function Header() {
             className="flex items-center space-x-2
                       bg-[var(--background)] text-[#CD6026]
                       text-sm px-5 py-2 rounded-full
-                      hover:bg-[var(--card)] transition
-                      font-semibold"
+                      hover:bg-[var(--card)] transition"
           >
             <span>TRY A DEMO</span>
             <img
