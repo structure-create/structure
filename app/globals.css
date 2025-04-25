@@ -15,13 +15,6 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'PPNeueMontreal-Thin';
-  src: url('/fonts/PPNeueMontreal-Thin.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* Define variables */
 @layer base {
   :root {
@@ -46,7 +39,7 @@
   
   h1 {
     color: #333;
-    font-family: "PP Neue Montreal";
+    font-family: "PPNeueMontreal-Medium";
     font-size: 96px;
     font-style: normal;
     font-weight: 500;
@@ -61,13 +54,13 @@
   }
 
   h3 {
-    font-family: 'PPNeueMontreal-Thin', serif;
+    font-family: 'PPNeueMontreal-Medium', serif;
     font-weight: normal;
     font-size: 36px;
   }
 
   p {
-    font-family: 'PPNeueMontreal-Thin', serif;
+    font-family: 'PPNeueMontreal-Medium', serif;
     font-weight: 400px;
     font-size: 24px;
   }
@@ -78,7 +71,7 @@
     @apply border-border;
   }
   body {
-    font-family: 'PPNeueMontreal-Thin', serif;
+    font-family: 'PPNeueMontreal-Medium', serif;
     @apply bg-background text-foreground;
   }
 }
