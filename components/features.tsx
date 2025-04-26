@@ -110,11 +110,11 @@ export function Features() {
             alt="Feature Blocks"
             className="absolute inset-0 w-full h-auto"
         />
-        {/* <img
+        <img
             src="/svgs/house.svg"
             alt="House Illustration"
             className="absolute inset-0 w-full h-auto"
-        /> */}
+        />
         </div>
     </div>
     </section>
