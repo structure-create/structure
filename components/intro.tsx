@@ -12,7 +12,7 @@ const redirectToCognitoLogin = () => {
 export function Intro() {
   return (
     
-    <section className="max-w-7xl mx-auto px-8 py-12 overflow-visible relative">
+    <section className="max-w-7xl mx-auto px-8 py-16 overflow-visible relative">
       {/* grid is top-aligned */}
       <div className="h-full grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* TEXT COLUMN */}
@@ -51,14 +51,14 @@ export function Intro() {
           />
         </div>
       </div>
-            {/* secondary callout */}
-            <div
-             className="
-               space-y-16
-               relative z-20
-               md:-mt-32 lg:-mt-40                /* pull up */
-             "
-          >
+        {/* secondary callout */}
+        <div
+            className="
+            space-y-16
+            relative z-20
+            md:-mt-32 lg:-mt-40                /* pull up */
+            "
+        >
         <p className="text-6xl">
             Construction moves <br /> fast, permits don’t.
         </p>
