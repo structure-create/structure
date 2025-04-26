@@ -21,9 +21,9 @@ export function Intro() {
                      md:mr-[-8rem] lg:mr-[-12rem] "
         >
         <div className = "gap-12">
-          <h1>
+        <p className="text-4xl md:text-8xl leading-tight pt-[40px]">
             Drawings to approvals. Faster.
-          </h1>
+        </p>
           <h3 className="mt-4">
             Quality control and compliance tool<br></br>for architects.
           </h3>
@@ -59,7 +59,7 @@ export function Intro() {
                md:-mt-32 lg:-mt-40                /* pull up */
              "
           >
-        <p className="text-7xl">
+        <p className="text-6xl">
             Construction moves <br /> fast, permits don’t.
         </p>
         <h4 className="max-w-2xl">
