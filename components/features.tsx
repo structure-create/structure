@@ -71,37 +71,37 @@ export function Features() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
         {/* LEFT COLUMN */}
         <div className="flex flex-col justify-between">
-        <div className="space-y-20">
-            {/* Feature #1 */}
-            <div>
-            <h5>Compliance grading</h5>
-            <h4>
-                Analyzes your plan and flags compliance errors prior to submission
-            </h4>
-            </div>
-            {/* Feature #2 */}
-            <div>
-            <h5 >Collaboration</h5>
-            <h4 >
-                Share plans with teams and receive comments
-            </h4>
-            </div>
-            {/* Feature #3 */}
-            <div>
-            <h5>Readiness score</h5>
-            <h4>
-                Provides compliance score with feedback to improve instantly
-            </h4>
-            </div>
-        </div>
+            <div className="space-y-15">
+                {/* Feature #1 */}
+                <div>
+                <h5>Compliance grading</h5>
+                <h4>
+                    Analyzes your plan and flags compliance errors prior to submission
+                </h4>
+                </div>
+                {/* Feature #2 */}
+                <div>
+                <h5 >Collaboration</h5>
+                <h4 >
+                    Share plans with teams and receive comments
+                </h4>
+                </div>
+                {/* Feature #3 */}
+                <div>
+                <h5>Readiness score</h5>
+                <h4>
+                    Provides compliance score with feedback to improve instantly
+                </h4>
+                </div>
 
-        {/* now only 50% wide and left-aligned */}
-        <a
-            href="/demo"
-            className="w-1/2 self-start mt-8 inline-block flex justify-center items-center px-8 py-4 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-2xl"
-        >
-            Try a demo
-        </a>
+            {/* now only 50% wide and left-aligned */}
+                <a
+                    href="/demo"
+                    className="w-1/2 self-start mt-8 inline-block flex justify-center items-center px-8 py-6 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-2xl"
+                >
+                    Try a demo
+                </a>
+            </div>
         </div>
 
         {/* RIGHT COLUMN with overlapping images */}
@@ -109,7 +109,7 @@ export function Features() {
         <img
             src="/svgs/blocks2.svg"
             alt="Feature Blocks"
-            className="-top-8 right-8 absolute inset-0 w-full h-auto"
+            className="-top-6 right-10 absolute inset-0 w-full h-auto"
         />
         <img
             src="/svgs/house.svg"
