@@ -11,9 +11,9 @@ const myFont = localFont({
 
 export function Footer() {
   return (
-    <footer className="bg-[var(--accent)] text-white py-16">
+    <footer className="bg-[var(--accent)] text-white py-4">
       <div className={`
-        max-w-7xl mx-auto px-6 py-16
+        max-w-7xl mx-auto px-6 py-8
         flex flex-col gap-y-10
         md:flex-row md:justify-between md:items-center
         md:gap-x-24 md:gap-y
