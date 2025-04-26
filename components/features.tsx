@@ -74,22 +74,22 @@ export function Features() {
         <div className="space-y-20">
             {/* Feature #1 */}
             <div>
-            <h2 className="font-bold">Compliance grading</h2>
-            <h4 className="mt-5">
+            <h5>Compliance grading</h5>
+            <h4>
                 Analyzes your plan and flags compliance errors prior to submission
             </h4>
             </div>
             {/* Feature #2 */}
             <div>
-            <h2 className="font-bold">Collaboration</h2>
-            <h4 className="mt-5">
+            <h5 >Collaboration</h5>
+            <h4 >
                 Share plans with teams and receive comments
             </h4>
             </div>
             {/* Feature #3 */}
             <div>
-            <h2 className="font-bold">Readiness score</h2>
-            <h4 className="mt-5">
+            <h5>Readiness score</h5>
+            <h4>
                 Provides compliance score with feedback to improve instantly
             </h4>
             </div>
@@ -109,7 +109,7 @@ export function Features() {
         <img
             src="/svgs/blocks2.svg"
             alt="Feature Blocks"
-            className="absolute inset-0 w-full h-auto"
+            className="-top-8 right-8 absolute inset-0 w-full h-auto"
         />
         <img
             src="/svgs/house.svg"
