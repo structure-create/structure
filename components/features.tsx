@@ -95,9 +95,10 @@ export function Features() {
             </div>
         </div>
 
+        {/* now only 50% wide and left-aligned */}
         <a
             href="/demo"
-            className="mt-8 inline-block px-8 py-4 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-2xl"
+            className="w-1/2 self-start mt-8 inline-block px-8 py-4 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-2xl"
         >
             Try a demo
         </a>
@@ -113,7 +114,15 @@ export function Features() {
         <img
             src="/svgs/house.svg"
             alt="House Illustration"
-            className="absolute inset-0 w-full h-auto"
+            className="
+            absolute 
+            top-1/2 left-1/2 
+            w-3/4 
+            h-auto 
+            transform -translate-x-1/2 -translate-y-1/2 
+            object-contain 
+            rounded-2xl
+            "
         />
         </div>
     </div>
