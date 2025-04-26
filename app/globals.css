@@ -10,8 +10,8 @@
 
 /* Define fonts */
 @font-face {
-  font-family: 'PPNeueMontreal-Medium';
-  src: url('/fonts/PPNeueMontreal-Medium.otf') format('opentype'); 
+  font-family: 'PPNeueMontreal-Book';
+  src: url('/fonts/PPNeueMontreal-Book.otf') format('opentype'); 
   font-style: normal;
 }
 
@@ -34,13 +34,14 @@
     --border: #C1C1C1;
 
     /* Hover Colors */
-    --hovaccent: #A14B1D;
+    --hovaccent: #A13E0A;
+    --lighthovaaccent: #FFC3A5;
   }
   
   h1 {
     color: #333;
-    font-family: "PPNeueMontreal-Medium";
-    font-size: 96px;
+    font-family: "PPNeueMontreal-Book";
+    font-size: 2m;
     font-style: normal;
     font-weight: 500;
     line-height: 100px;
@@ -48,28 +49,28 @@
 
   h2 {
     color: #333;
-    font-family: 'PPNeueMontreal-Medium';
+    font-family: 'PPNeueMontreal-Book';
     font-size: 48px;
     color: var(--foreground); 
   }
 
   h3 {
     color: #333;
-    font-family: 'PPNeueMontreal-Medium', serif;
+    font-family: 'PPNeueMontreal-Book', serif;
     font-weight: normal;
     font-size: 36px;
   }
 
   h4 {
     color: #333;
-    font-family: 'PPNeueMontreal-Medium', serif;
+    font-family: 'PPNeueMontreal-Book', serif;
     font-weight: normal;
     font-size: 32px;
   }
 
   p {
     color: #333;
-    font-family: 'PPNeueMontreal-Medium', serif;
+    font-family: 'PPNeueMontreal-Book', serif;
     font-weight: 400px;
     font-size: 24px;
   }
@@ -80,7 +81,7 @@
     @apply border-border;
   }
   body {
-    font-family: 'PPNeueMontreal-Medium', serif;
+    font-family: 'PPNeueMontreal-Book', serif;
     @apply bg-background text-foreground;
   }
 }

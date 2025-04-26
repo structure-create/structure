@@ -3,7 +3,7 @@ import Link from "next/link";
 import localFont from "next/font/local";
 
 const myFont = localFont({
-  src: "../public/fonts/PPNeueMontreal-Medium.otf",
+  src: "../public/fonts/PPNeueMontreal-Book.otf",
   display: "swap",
   weight: "400",   // match the font’s native weight
   style: "normal",
