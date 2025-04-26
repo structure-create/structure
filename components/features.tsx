@@ -71,8 +71,8 @@ export function Features() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
         {/* LEFT COLUMN */}
         <div className="flex flex-col justify-between">
-            <div className="space-y-20">
-                <div className="space-y-17">
+            <div className="space-y-22">
+                <div className="space-y-20">
                     {/* Feature #1 */}
                     <div>
                     <h5>Compliance grading</h5>
@@ -110,7 +110,7 @@ export function Features() {
         <img
             src="/svgs/blocks2.svg"
             alt="Feature Blocks"
-            className="-top-8 right-12 absolute inset-0 w-full h-auto"
+            className="-top-10 right-14 absolute inset-0 w-full h-auto"
         />
         <img
             src="/svgs/house.svg"
