@@ -18,7 +18,7 @@ const FadeIn = dynamic(() => import("@/components/fadein"), {
 
 export default function Home() {
   return (
-    <div className="py-20 bg-[var(--background)]">
+    <div className="bg-[var(--background)]">
       <Header />
       <FadeIn>
         <Intro/>
