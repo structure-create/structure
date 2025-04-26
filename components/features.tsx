@@ -12,31 +12,31 @@ const FadeIn = dynamic(() => import("@/components/fadein"), {
 export function Features() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 overflow-visible">
-      <div className="grid grid-cols-2 grid-rows-3 gap-x-16 gap-y-20 items-start overflow-visible relative">
-        {/* 1) Top-left */}
-        <div className="col-start-1 row-start-1 relative z-20 md:-mr-16 lg:-mr-24 flex items-center space-x-6">
-          <img
-            src="/svgs/feature1.svg"
-            alt="Compliance grading"
-          />
-        </div>
+        <div className="flex flex-col space-y-6">
+            {/* Top: image left-justified */}
+            <div className="flex justify-start w-full">
+                <img
+                src="/svgs/feature1.svg"
+                alt="Icon 1"
+                />
+            </div>
 
-        {/* 2) Center-right */}
-        <div className="col-start-2 row-start-2 relative z-10 md:-ml-16 lg:-ml-24 flex items-center space-x-6">
-          <img
-            src="/svgs/feature2.svg"
-            alt="Readiness score"
-          />
-        </div>
+            {/* Middle: image right-justified */}
+            <div className="flex justify-end w-full">
+                <img
+                src="/svgs/feature2.svg"
+                alt="Icon 2"
+                />
+            </div>
 
-        {/* 3) Bottom-left */}
-        <div className="col-start-1 row-start-3 relative z-20 md:-mr-16 lg:-mr-24 flex items-center space-x-6">
-          <img
-            src="/svgs/feature3.svg"
-            alt="Collaboration"
-          />
+            {/* Bottom: image left-justified */}
+            <div className="flex justify-start w-full">
+                <img
+                src="/svgs/feature3.svg"
+                alt="Icon 3"
+                />
+            </div>
         </div>
-      </div>
     </div>
   );
 }
