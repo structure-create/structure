@@ -51,21 +51,6 @@ const FadeIn = dynamic(() => import("@/components/fadein"), {
 })
 
 export function Features() {
-    const features = [
-        {
-          title: 'Compliance grading',
-          description: 'Analyzes your plan and flags compliance errors prior to submission',
-        },
-        {
-          title: 'Collaboration',
-          description: 'Share plans with teams and receive comments',
-        },
-        {
-          title: 'Readiness score',
-          description: 'Provides compliance score with feedback to improve instantly',
-        },
-      ]
-
   return (
     <section className="max-w-7xl mx-auto px-6 py-12">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
@@ -75,7 +60,7 @@ export function Features() {
                 <div className="space-y-16">
                     {/* Feature #1 */}
                     <div>
-                    <h5>Compliance grading</h5>
+                    <h5>Compliance Copilot</h5>
                     <h4>
                         Analyzes your plan and flags compliance errors prior to submission
                     </h4>
@@ -89,7 +74,7 @@ export function Features() {
                     </div>
                     {/* Feature #3 */}
                     <div>
-                    <h5>Readiness score</h5>
+                    <h5>Readiness Score</h5>
                     <h4>
                         Provides compliance score with feedback to improve instantly
                     </h4>
