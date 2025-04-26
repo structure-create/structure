@@ -74,31 +74,31 @@ export function Features() {
         <div className="space-y-20">
             {/* Feature #1 */}
             <div>
-            <h3 className="font-bold">Compliance grading</h3>
-            <p className="mt-5">
+            <h2 className="font-bold">Compliance grading</h2>
+            <h4 className="mt-5">
                 Analyzes your plan and flags compliance errors prior to submission
-            </p>
+            </h4>
             </div>
             {/* Feature #2 */}
             <div>
-            <h3 className="font-bold">Collaboration</h3>
-            <p className="mt-5">
+            <h2 className="font-bold">Collaboration</h2>
+            <h4 className="mt-5">
                 Share plans with teams and receive comments
-            </p>
+            </h4>
             </div>
             {/* Feature #3 */}
             <div>
-            <h3 className="font-bold">Readiness score</h3>
-            <p className="mt-5">
+            <h2 className="font-bold">Readiness score</h2>
+            <h4 className="mt-5">
                 Provides compliance score with feedback to improve instantly
-            </p>
+            </h4>
             </div>
         </div>
 
         {/* now only 50% wide and left-aligned */}
         <a
             href="/demo"
-            className="w-1/2 self-start mt-8 inline-block px-8 py-4 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-2xl"
+            className="w-1/2 self-start mt-8 inline-block flex justify-center items-center px-8 py-4 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-2xl"
         >
             Try a demo
         </a>
