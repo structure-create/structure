@@ -12,7 +12,7 @@ const redirectToCognitoLogin = () => {
 export function Intro() {
   return (
     
-    <section className="max-w-7xl mx-auto px-1 py-12 overflow-visible relative">
+    <section className="max-w-7xl mx-auto px-8 py-12 overflow-visible relative">
       {/* grid is top-aligned */}
       <div className="h-full grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* TEXT COLUMN */}
