@@ -52,7 +52,7 @@ export function Intro() {
             md:-mt-32 lg:-mt-40                /* pull up */
             "
         >
-        <p className="text-6xl py-6">
+        <p className="text-6xl">
             Construction moves <br /> fast, permits don’t.
         </p>
         <h4 className="max-w-2xl">
