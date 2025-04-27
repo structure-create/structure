@@ -6,8 +6,8 @@ module.exports = {
   async rewrites() {
     return [
       {
-        source: '/api/gemini',
-        destination: `${PY_API_URL}/api/gemini`,
+        source: '/api/claude',
+        destination: `${PY_API_URL}/api/claude`,
       },
     ]
   },
