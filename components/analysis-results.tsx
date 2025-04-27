@@ -32,8 +32,8 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
         </div>
       </div>
 
-      <Card className="border-gray-100">
-        <CardHeader className="bg-gray-50 border-b border-gray-100">
+      <Card className="border-black-100">
+        <CardHeader className="border-b border-black-100">
           <CardTitle className="text-gray-900">Potential conflicts</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
