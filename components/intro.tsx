@@ -14,7 +14,7 @@ export function Intro() {
                      md:mr-[-8rem] lg:mr-[-12rem] "
         >
         <div className = "gap-12">
-        <p className="text-4xl md:text-8xl leading-tight pt-[40px]">
+        <p className="md:text-8xl">
             Drawings to approvals. Faster.
         </p>
           <h3 className="mt-4">
