@@ -32,16 +32,16 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
         </div>
       </div>
 
-      <Card className="border-navy-100">
-        <CardHeader className="bg-navy-50 border-b border-navy-100">
-          <CardTitle className="text-navy-900">Potential conflicts</CardTitle>
+      <Card className="border-gray-100">
+        <CardHeader className="bg-gray-50 border-b border-gray-100">
+          <CardTitle className="text-gray-900">Potential conflicts</CardTitle>
         </CardHeader>
         <CardContent className="p-6">
           {issues.length > 0 ? (
             <div className="space-y-6">
               {issues.map((section, index) => (
                 <div key={index} className="space-y-2">
-                  <h4 className="font-semibold text-navy-800">{section.category}</h4>
+                  <h4 className="font-semibold text-gray-800">{section.category}</h4>
                   <ul className="space-y-1 list-disc pl-5">
                     {section.items.map((item, itemIndex) => (
                       <li key={itemIndex} className="text-gray-700">
