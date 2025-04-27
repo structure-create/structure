@@ -1,13 +1,6 @@
 import Link from 'next/link'
-
-const redirectToCognitoLogin = () => {
-    const clientId = "5u1cfh5oh8qm165bvrseutamnr";
-    const redirectUri = "https://d84l1y8p4kdic.cloudfront.net"; // your app's redirect URI
-    const cognitoDomain = "https://us-west-1tiknitkef.auth.us-west-1.amazoncognito.com";
-    const loginUrl = `${cognitoDomain}/login?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}`;
-  
-    window.location.href = loginUrl;
-  };
+import { getCalApi } from "@calcom/embed-react";
+import { useEffect } from "react";
 
 export function Intro() {
   return (
@@ -33,9 +26,9 @@ export function Intro() {
                 Try a demo
               </p>
             </Link>
-            <Link href="/signup">
+            <Link href="https://cal.com/arnavashah/30min">
               <p className="px-6 py-3 bg-[#FDE0CA] hover:bg-[#FFC3A5] text-[#CD6026] rounded-[15px]">
-                Create an account
+                Get Started
               </p>
             </Link>
           </div>
