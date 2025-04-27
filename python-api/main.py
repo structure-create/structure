@@ -23,8 +23,9 @@ app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://www.buildstructure.net",      # your prod Next.js URL
-        "https://<your-vercel-preview>.vercel.app", 
+        "https://www.buildstructure.net",
+        "https://structure-one.vercel.app",
+        "https://structure-structures-projects.vercel.app",
         "http://localhost:3000",              # local dev
     ],
     allow_methods=["POST", "OPTIONS"],
