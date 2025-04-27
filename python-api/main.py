@@ -13,13 +13,13 @@ OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 if not OPENROUTER_API_KEY:
     raise RuntimeError("Missing OPENROUTER_API_KEY in environment")
 
-class GeminiRequest(BaseModel):
+class ClaudeRequest(BaseModel):
     text: str
 
 app = FastAPI()
 
-@app.post("/api/gemini")
-async def gemini_handler(payload: GeminiRequest):
+@app.post("/api/claude")
+async def claude_handler(payload: ClaudeRequest):
     prompt = f"""
 You are an expert compliance and language reviewer for construction permits.
 Your task is to evaluate a permit document and respond with a structured JSON object that includes a compliance score and highlights any potential issues in grammar, clarity, or regulation violations.
@@ -50,7 +50,7 @@ Below is the content of the permit to evaluate:
         resp = requests.post(
             "https://openrouter.ai/api/v1/chat/completions",
             json={
-                "model": "google/gemini-2.0-flash-001",
+                "model": "anthropic/claude-3-opus",
                 "messages": [{"role": "user", "content": prompt}],
             },
             headers={
