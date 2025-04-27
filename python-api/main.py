@@ -2,6 +2,7 @@
 
 import os
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import requests
 from dotenv import load_dotenv
@@ -17,6 +18,18 @@ class ClaudeRequest(BaseModel):
     text: str
 
 app = FastAPI()
+
+# Allow CORS from your front end (or use ["*"] to test)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://www.buildstructure.net",      # your prod Next.js URL
+        "https://<your-vercel-preview>.vercel.app", 
+        "http://localhost:3000",              # local dev
+    ],
+    allow_methods=["POST", "OPTIONS"],
+    allow_headers=["*"],
+)
 
 @app.post("/api/claude")
 async def claude_handler(payload: ClaudeRequest):
