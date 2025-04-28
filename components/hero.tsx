@@ -11,7 +11,7 @@ export function Hero({ setActiveUpload }: { setActiveUpload: (value: "permit" | 
             Compliance Before Submission {/* Streamline Your Construction Permit Compliance */}
             </p>
             <p className="mx-auto max-w-[700px] text-gray-600 md:text-2xl">
-            Upload your construction permit PDF to instantly streamline your QA/QC process with automated analysis for compliance issues, regulatory concerns, and a compliance score.
+            Upload your building permit plans to instantly streamline your QA/QC process with automated analysis for compliance issues, regulatory concerns, and a compliance score.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 min-[400px]:gap-6 justify-center">
@@ -20,7 +20,7 @@ export function Hero({ setActiveUpload }: { setActiveUpload: (value: "permit" | 
                 onClick={() => setActiveUpload("permit")}
                 className="bg-[var(--accent)] text-[var(--background)] text-sm px-8 py-2 rounded-full font-semibold hover:bg-[var(--hovaccent)] transition"
               >
-                Analyze Your Permit
+                Analyze Your Building Plan
               </button>
             </Link>
             {/* <Link href="#upload-drawing">

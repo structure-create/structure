@@ -133,14 +133,12 @@ export function UploadPermit() {
     <section id="upload-permit" className="w-full py-12 md:py-24 lg:py-32 bg-[var(--background)]">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="flex flex-col items-center space-y-4 text-center mb-12">
-          <div className="space-y-2">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl text-navy-900">
-              Upload Your Construction Permit
-            </h2>
-            <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
-              Get instant analysis and compliance scoring for your construction permits
-            </p>
-          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-navy-900">
+            Upload Your Building Plan
+          </h2>
+          <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
+            Get instant analysis and compliance scoring for your building plans
+          </p>
         </div>
 
         <div className="mx-auto max-w-3xl">
@@ -152,29 +150,15 @@ export function UploadPermit() {
                     <FileText className="h-8 w-8 text-orange-700" />
                   </div>
                   <div className="space-y-2 text-center">
-                    <h3 className="text-lg font-semibold text-orange-900">Upload your PDF</h3>
-                    <p className="text-sm text-gray-500">
-                      Drag and drop or click to upload your construction permit PDF
-                    </p>
+                    <h3 className="text-lg font-semibold text-orange-900">
+                      Upload your PDF
+                    </h3>
                   </div>
-                  <div className="w-full max-w-sm">
-                    <label
-                      htmlFor="pdf-upload"
-                      className="flex cursor-pointer flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-8 hover:bg-gray-50"
-                    >
-                      <div className="flex items-center justify-center text-sm text-gray-600">
-                        <Upload className="mr-2 h-4 w-4" />
-                        <span>Select PDF file</span>
-                      </div>
-                      <input
-                        id="pdf-upload"
-                        type="file"
-                        accept="application/pdf"
-                        onChange={handleFileChange}
-                        className="sr-only"
-                      />
-                    </label>
-                  </div>
+                  <label htmlFor="pdf-upload" className="w-full max-w-sm flex cursor-pointer flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-8 hover:bg-gray-50">
+                    <Upload className="mr-2 h-4 w-4 text-gray-600" />
+                    <span className="text-sm text-gray-600">Select PDF file</span>
+                    <input id="pdf-upload" type="file" accept="application/pdf" onChange={handleFileChange} className="sr-only" />
+                  </label>
                   {file && (
                     <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
                       <FileText className="h-4 w-4" />
@@ -183,23 +167,18 @@ export function UploadPermit() {
                   )}
                   {error && <p className="text-sm text-red-500">{error}</p>}
                 </div>
+
                 <div className="flex justify-center">
-                  <div className="flex gap-4">
-                    <Button
-                      type="submit"
-                      className="bg-orange-700 hover:bg-orange-800 text-white"
-                      disabled={!file || isUploading}
-                    >
-                      {isUploading ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Analyzing...
-                        </>
-                      ) : (
-                        "Analyze Permit"
-                      )}
-                    </Button>
-                  </div>
+                  <Button type="submit" className="bg-orange-700 hover:bg-orange-800 text-white" disabled={!file || isUploading}>
+                    {isUploading ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      "Analyze Permit"
+                    )}
+                  </Button>
                 </div>
               </form>
             </CardContent>
@@ -358,4 +337,3 @@ export function UploadPermit() {
 //     </section>
 //   )
 // }
-
