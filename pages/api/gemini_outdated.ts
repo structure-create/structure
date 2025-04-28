@@ -20,34 +20,33 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       {
       "complianceScore": number (0-100),
       "grammarIssues": [
-          {
-          "quote": string,
-          "explanation": string
-          }
+        {
+        "quote": string,
+        "explanation": string
+        }
       ],
       "ambiguityIssues": [
-          {
-          "quote": string,
-          "explanation": string
-          }
+        {
+        "quote": string,
+        "explanation": string
+        }
       ],
       "complianceIssues": [
-          {
-          "quote": string,
-          "explanation": string
-          }
+        {
+        "quote": string,
+        "explanation": string
+        }
       ],
       "codesViolated": [
-          {
-          "quote": string,
-          "explanation": string
-          }
+        {
+        "quote": string,
+        "explanation": string
+        }
       ]
       }
       Below is the content of the permit to evaluate:
       """${text}"""
-  `;
-
+    `;
 
     // Call OpenRouter API
     const response = await axios.post(
