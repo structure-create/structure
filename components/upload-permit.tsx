@@ -1,3 +1,4 @@
+// Minimal version
 "use client"
 
 import type React from "react"
@@ -59,7 +60,7 @@ export function UploadPermit() {
       const text = await extractTextFromPDF(file)
 
       // Send API call
-      const response = await fetch("/api/claude", {
+      const response = await fetch("/api/gemini_outdated", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -210,3 +211,151 @@ export function UploadPermit() {
     </section>
   )
 }
+
+
+// Proper version
+// "use client"
+
+// import React, { useState } from "react"
+// import { Upload, FileText, Loader2 } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+// import { Card, CardContent } from "@/components/ui/card"
+// import { AnalysisResults } from "./analysis-results"
+
+// export function UploadPermit() {
+//   const [file, setFile] = useState<File | null>(null)
+//   const [isUploading, setIsUploading] = useState(false)
+//   const [analysis, setAnalysis] = useState<any>(null)
+//   const [error, setError] = useState<string | null>(null)
+
+//   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const selectedFile = e.target.files?.[0]
+//     if (selectedFile && selectedFile.type === "application/pdf") {
+//       setFile(selectedFile)
+//       setError(null)
+//     } else {
+//       setFile(null)
+//       setError("Please select a valid PDF file")
+//     }
+//   }
+
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault()
+//     if (!file) return
+
+//     setIsUploading(true)
+//     setError(null)
+
+//     try {
+//       // Prepare form-data
+//       const formData = new FormData()
+//       formData.append("file", file)
+
+//       // Send to backend endpoint
+//       const response = await fetch("http://localhost:8000/api/claude", {
+//         method: "POST",
+//         body: formData,
+//       })
+//       if (!response.ok) throw new Error(`HTTP ${response.status}`)
+//       const data = await response.json()
+//       console.log("Response:", data)
+
+//       // Transform into AnalysisResults format
+//       const formatted = {
+//         score: data.compliance_score,
+//         issues: [
+//           {
+//             category: "Violations",
+//             items: data.violations.flatMap((pageObj: any) =>
+//               pageObj.violations.map((v: any, idx: number) => (
+//                 <div key={`${pageObj.page}-${idx}`} className="mb-6">
+//                   <p className="font-bold underline">
+//                     {v.violation.citation}
+//                   </p>
+//                   <p className="mt-1 italic">
+//                     &ldquo;{v.violation.quote}&rdquo;
+//                   </p>
+//                   <p className="mt-1 text-gray-700">
+//                     {v.violation.reason}
+//                   </p>
+//                 </div>
+//               ))
+//             ),
+//           },
+//         ],
+//       };      
+
+//       setAnalysis(formatted)
+//     } catch (err) {
+//       console.error(err)
+//       setError("Failed to analyze the PDF. Please try again.")
+//     } finally {
+//       setIsUploading(false)
+//     }
+//   }
+
+//   return (
+//     <section id="upload-permit" className="w-full py-12 md:py-24 lg:py-32 bg-[var(--background)]">
+//       <div className="container px-4 md:px-6 mx-auto">
+//         <div className="flex flex-col items-center space-y-4 text-center mb-12">
+//           <h2 className="text-3xl sm:text-4xl md:text-5xl text-navy-900">
+//             Upload Your Construction Permit
+//           </h2>
+//           <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
+//             Get instant analysis and compliance scoring for your construction permits
+//           </p>
+//         </div>
+
+//         <div className="mx-auto max-w-3xl">
+//           <Card className="border-2 border-dashed border-gray-200 bg-white">
+//             <CardContent className="p-6">
+//               <form onSubmit={handleSubmit} className="space-y-6">
+//                 <div className="flex flex-col items-center justify-center space-y-4 py-6">
+//                   <div className="rounded-full bg-orange-50 p-4">
+//                     <FileText className="h-8 w-8 text-orange-700" />
+//                   </div>
+//                   <div className="space-y-2 text-center">
+//                     <h3 className="text-lg font-semibold text-orange-900">
+//                       Upload your PDF
+//                     </h3>
+//                     <p className="text-sm text-gray-500">
+//                       Drag and drop or click to upload your construction permit PDF
+//                     </p>
+//                   </div>
+//                   <label htmlFor="pdf-upload" className="w-full max-w-sm flex cursor-pointer flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-8 hover:bg-gray-50">
+//                     <Upload className="mr-2 h-4 w-4 text-gray-600" />
+//                     <span className="text-sm text-gray-600">Select PDF file</span>
+//                     <input id="pdf-upload" type="file" accept="application/pdf" onChange={handleFileChange} className="sr-only" />
+//                   </label>
+//                   {file && (
+//                     <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+//                       <FileText className="h-4 w-4" />
+//                       <span>{file.name}</span>
+//                     </div>
+//                   )}
+//                   {error && <p className="text-sm text-red-500">{error}</p>}
+//                 </div>
+
+//                 <div className="flex justify-center">
+//                   <Button type="submit" className="bg-orange-700 hover:bg-orange-800 text-white" disabled={!file || isUploading}>
+//                     {isUploading ? (
+//                       <>
+//                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+//                         Analyzing...
+//                       </>
+//                     ) : (
+//                       "Analyze Permit"
+//                     )}
+//                   </Button>
+//                 </div>
+//               </form>
+//             </CardContent>
+//           </Card>
+
+//           {analysis && <AnalysisResults analysis={analysis} />}
+//         </div>
+//       </div>
+//     </section>
+//   )
+// }
+
