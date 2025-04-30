@@ -96,9 +96,9 @@ export function Contact() {
                 {/* Submit */}
                 <button
                 type="submit"
-                className="w-full bg-[var(--accent)] text-[var(--background)] font-bold py-2 rounded-md hover:bg-[var(--hovaccent)] transition"
+                className="w-full bg-[var(--accent)] text-[var(--background)] font-bold py-2 rounded-sm hover:bg-[var(--hovaccent)] transition"
                 >
-                <p className="text-[24px]">Send</p>
+                <p className="text-[24px] text-white">Send</p>
                 </button>
 
                 {/* Submission sent */}

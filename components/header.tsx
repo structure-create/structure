@@ -31,7 +31,7 @@ export function Header() {
         <button
             className="flex items-center space-x-2
                       bg-[var(--background)] text-[#CD6026]
-                      text-sm px-5 py-2 rounded-full
+                      text-sm px-5 py-2 rounded-sm
                       hover:bg-[var(--card)] transition"
           >
             CONTACT US
@@ -42,7 +42,7 @@ export function Header() {
           <button
             className="flex items-center space-x-2
                       bg-[var(--background)] text-[#CD6026]
-                      text-sm px-5 py-2 rounded-full
+                      text-sm px-5 py-2 rounded-sm
                       hover:bg-[var(--card)] transition"
           >
             <span>TRY A DEMO</span>

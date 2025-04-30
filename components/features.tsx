@@ -83,7 +83,7 @@ export function Features() {
             {/* now only 50% wide and left-aligned */}
                 <a
                     href="/demo"
-                    className="w-1/2 self-start mt-8 inline-block flex justify-center items-center px-8 py-6 bg-[#CD6026] hover:bg-[#A13E0A] text-2xl text-white rounded-2xl"
+                    className="w-1/2 self-start mt-8 inline-block flex justify-center items-center px-8 py-6 bg-[#CD6026] hover:bg-[#A13E0A] text-2xl text-white rounded-sm"
                 >
                     Try a demo
                 </a>

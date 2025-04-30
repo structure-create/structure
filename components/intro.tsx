@@ -22,12 +22,12 @@ export function Intro() {
           </h3>
           <div className="mt-6 flex flex-wrap gap-4">
             <Link href="/demo">
-              <p className="px-6 py-3 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-[15px]">
+              <p className="px-6 py-3 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-sm">
                 Try a demo
               </p>
             </Link>
             <Link href="https://cal.com/arnavashah/30min">
-              <p className="px-6 py-3 bg-[#FDE0CA] hover:bg-[#FFC3A5] text-[#CD6026] rounded-[15px]">
+              <p className="px-6 py-3 bg-[#FDE0CA] hover:bg-[#FFC3A5] text-[#CD6026] rounded-sm">
                 Get Started
               </p>
             </Link>

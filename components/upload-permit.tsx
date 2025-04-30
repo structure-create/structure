@@ -169,7 +169,7 @@ export function UploadPermit() {
                 </div>
 
                 <div className="flex justify-center">
-                  <Button type="submit" className="bg-orange-700 hover:bg-orange-800 text-white" disabled={!file || isUploading}>
+                  <Button type="submit" className="bg-orange-700 rounded-sm hover:bg-orange-800 text-white" disabled={!file || isUploading}>
                     {isUploading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
