@@ -1,20 +1,11 @@
 import Link from "next/link";
 
-import localFont from "next/font/local";
-
-const myFont = localFont({
-  src: "../public/fonts/PPNeueMontreal-Book.otf",
-  display: "swap",
-  weight: "400",   // match the font’s native weight
-  style: "normal",
-});
-
 export function Footer() {
   return (
-    <footer className="bg-[var(--accent)] text-white py-4">
+    <footer className="bg-[var(--accent)] text-white ">
       <div className={`
         max-w-7xl mx-auto px-6 py-8
-        flex flex-col gap-y-10
+        flex flex-col
         md:flex-row md:justify-between md:items-center
         md:gap-x-24 md:gap-y
       `}>
@@ -51,7 +42,7 @@ export function Footer() {
         </div>
       </div>
       <div className={`
-        max-w-7xl mx-auto px-6 py-16
+        max-w-7xl mx-auto px-6 py-6
         flex flex-col gap-y-10
         md:flex-row md:justify-between md:items-center
         md:gap-x-24 md:gap-y text-right
