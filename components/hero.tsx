@@ -23,19 +23,19 @@ export function Hero({ setActiveUpload }: { setActiveUpload: (value: "permit" | 
                 Analyze Your Building Plan
               </button>
             </Link>
-            {/* <Link href="#upload-drawing">
+            <Link href="#upload-drawing">
               <button
                 onClick={() => setActiveUpload("drawing")}
                 className="bg-[var(--accent)] text-[var(--background)] text-sm px-8 py-2 rounded-full font-semibold hover:bg-[var(--hovaccent)] transition"
               >
                 Analyze Your Drawing
               </button>
-            </Link> */}
-            <Link href="/">
+            </Link>
+            {/* <Link href="/">
               <p className="bg-[var(--background)] text-[var(--foreground)] text-sm px-5 py-2 rounded-full font-semibold hover:bg-[var(--border)] transition">
                 Learn More
               </p>
-            </Link>
+            </Link> */}
           </div>
           <div className="mt-12 animate-bounce">
             <ArrowDown className="h-6 w-6 text-navy-700" />
