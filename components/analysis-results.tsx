@@ -64,7 +64,7 @@ export function AnalysisResults({ analysis }: AnalysisResultsProps) {
         <Link href="/feedback">
           <button
             className="mx-auto block text-2xl font-semibold px-8 py-4
-                       bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-[15px]"
+                       bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-sm"
           >
             Submit your feedback!
           </button>
