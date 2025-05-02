@@ -9,43 +9,45 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { text } = req.body;
 
     // Define LLM prompt
+    // 🔄  replace the whole prompt with this
     const prompt = `
-      You are an expert compliance and language reviewer for construction permits.
-      Your task is to evaluate a permit document and respond with a structured JSON object that includes a compliance score and highlights any potential issues in grammar, clarity, or regulation violations.
-      The main compliance regulations you are looking for are not following California's most recent energy efficiency requirements, incorrect soil conditions, missing information, MAJORLY incorrect grammar/spelling, and anything that violates California building regulation. 
-      If there are specific codes that are violated then cite the exact code that was violated followed by an explanation as to why/how it was violated.
-      Only include elements in the JSON if it is in violation of a compliance rule, has incorrect grammar, or is ambiguous. 
-      Please follow this format exactly and return only the raw JSON — no commentary, no code blocks, no markdown formatting.
-      The JSON should ALWAYS contain:
-      {
-      "complianceScore": number (0-100),
-      "grammarIssues": [
-        {
-        "quote": string,
-        "explanation": string
-        }
+    You are an expert compliance and language reviewer for construction permits.
+
+    Return **ONLY** a raw JSON object (no markdown) in the following format.
+    Each category array MUST be present; if no violations exist, return an empty array.
+
+    {
+      "complianceScore": 0‑100,
+
+      "Electrical": [
+        { "quote": "...", "explanation": "..." }
       ],
-      "ambiguityIssues": [
-        {
-        "quote": string,
-        "explanation": string
-        }
+
+      "Zoning": [
+        { "quote": "...", "explanation": "..." }
       ],
-      "complianceIssues": [
-        {
-        "quote": string,
-        "explanation": string
-        }
+
+      "Plumbing": [
+        { "quote": "...", "explanation": "..." }
       ],
-      "codesViolated": [
-        {
-        "quote": string,
-        "explanation": string
-        }
+
+      "Mechanical": [
+        { "quote": "...", "explanation": "..." }
+      ],
+
+      "Ambiguity": [
+        { "quote": "...", "explanation": "..." }
       ]
-      }
-      Below is the content of the permit to evaluate:
-      """${text}"""
+    }
+
+    • **Electrical, Plumbing, Mechanical** – list any NEC / CPC / CMC issues, service‑load errors, fixture counts, Title 24 energy requirements, etc.  
+    • **Zoning** – lot coverage, setbacks, parking, height limits, use restrictions, etc.  
+    • **Ambiguity** – unclear statements, missing references, contradictory notes, vague qualifiers.
+
+    Only include items actually found in the permit.
+
+    Here is the permit text:
+    """${text}"""
     `;
 
     // Call OpenRouter API
