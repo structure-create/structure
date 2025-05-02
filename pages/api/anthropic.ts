@@ -10,41 +10,41 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Define LLM prompt
     const prompt = `
-      You are an expert reviewer of construction permit drawings.
-      
-      Your task is to evaluate a construction figure for ADA and general regulation compliance. Return your findings as a strict JSON object. Do not include any extra text, markdown, or commentary — only valid JSON.
-      
-      For ambiguity issues, include the quote followed by the reason why the drawing was not clear. For compliance issues, include the ADA code violated
-      followed by why the code was violated.
+      You are an expert compliance and language reviewer for construction permits.
 
-      Provide a general summary at the end to explicity state if the drawing is ADA compliant or not.
+      Return **ONLY** a raw JSON object (no markdown) in the following format.
+      Each category array MUST be present; if no violations exist, return an empty array.
 
-      Only include elements in the JSON if they are violations or ambiguous.
-      
-      Here is the required JSON format:
       {
-        "complianceScore": number (between 0-100),
-        "ambiguityIssues": [
-          {
-            "quote": string,
-            "explanation": string
-          }
+        "complianceScore": 0‑100,
+
+        "Electrical": [
+          { "quote": "...", "explanation": "..." }
         ],
-        "complianceIssues": [
-          {
-            "code": string,
-            "explanation": string
-          }
+
+        "Zoning": [
+          { "quote": "...", "explanation": "..." }
         ],
-        "summary": [
-          {
-            "summary": string,
-          }
+
+        "Plumbing": [
+          { "quote": "...", "explanation": "..." }
+        ],
+
+        "Mechanical": [
+          { "quote": "...", "explanation": "..." }
+        ],
+
+        "Ambiguity": [
+          { "quote": "...", "explanation": "..." }
         ]
       }
-      
-      Do not wrap the response in backticks, code blocks, or markdown. Only return the raw JSON.
-      
+
+      • **Electrical, Plumbing, Mechanical** – list any NEC / CPC / CMC issues, service‑load errors, fixture counts, Title 24 energy requirements, etc.  
+      • **Zoning** – lot coverage, setbacks, parking, height limits, use restrictions, etc.  
+      • **Ambiguity** – unclear statements, missing references, contradictory notes, vague qualifiers.
+
+      Only include items actually found in the permit.
+
       Analyze the drawing below:
     `;
 
