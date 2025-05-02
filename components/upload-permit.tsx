@@ -82,24 +82,13 @@ export function UploadPermit() {
         const analysisFormatted = {
           score: parsed.complianceScore,
           issues: [
-            {
-              category: "Grammar Issues",
-              items: parsed.grammarIssues.map((issue: any) => `"${issue.quote}" — ${issue.explanation}`),
-            },
-            {
-              category: "Ambiguity Issues",
-              items: parsed.ambiguityIssues.map((issue: any) => `"${issue.quote}" — ${issue.explanation}`),
-            },
-            {
-              category: "Compliance Issues",
-              items: parsed.complianceIssues.map((issue: any) => `"${issue.quote}" — ${issue.explanation}`),
-            },
-            {
-              category: "Codes Violated",
-              items: parsed.codesViolated.map((issue: any) => `"${issue.quote}" — ${issue.explanation}`),
-            }
-          ].filter((section) => section.items.length > 0),
-        };
+            { category: "Electrical",  items: parsed.Electrical .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Zoning",      items: parsed.Zoning     .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Plumbing",    items: parsed.Plumbing   .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Mechanical",  items: parsed.Mechanical .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Ambiguity",   items: parsed.Ambiguity  .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+          ].filter(s => s.items.length > 0),
+        };        
       
         setAnalysis(analysisFormatted);
       } catch (err) {
