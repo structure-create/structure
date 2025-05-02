@@ -62,11 +62,11 @@ export function Hero({
             >
               Analyze Your Building Plan
             </button>
-            <Link href="/">
+{/*             <Link href="/">
               <p className="w-64 block bg-[var(--accent)] text-[var(--background)] px-4 py-3 rounded-sm font-semibold text-lg hover:bg-[var(--hovaccent)] transition">
                 Learn More
               </p>
-            </Link>
+            </Link> */}
           </div>
 
           {/* Scroll Indicator */}
