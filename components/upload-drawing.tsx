@@ -196,7 +196,7 @@ export function UploadDrawing() {
                   <div className="flex gap-4">
                     <Button
                       type="submit"
-                      className="bg-orange-700 hover:bg-orange-800 text-white" 
+                      className="bg-orange-700 hover:bg-orange-800 text-white rounded-sm" 
                       disabled={!file || isUploading}
                     >
                       {isUploading ? (
