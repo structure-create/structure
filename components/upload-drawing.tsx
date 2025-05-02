@@ -93,25 +93,13 @@ export function UploadDrawing() {
         const analysisFormatted = {
           score: parsed.complianceScore,
           issues: [
-            {
-              category: "Ambiguity Issues",
-              items: parsed.ambiguityIssues.map((issue: any) => `"${issue.quote}" — ${issue.explanation}`),
-            },
-            {
-              category: "Compliance Issues",
-              items: parsed.complianceIssues.map((issue: any, idx: number) => (
-                <span key={idx}>
-                  <strong>{issue.code}</strong> — {issue.explanation}
-                </span>
-              )),
-            },
-            // {
-            //   category: "Summary",
-            //   items: parsed.ambiguityIssues.map((issue: any) => `${issue.summary}`),
-            // },
-          ].filter((section) => section.items.length > 0),
-          summary: parsed.summary?.[0]?.summary ?? "", // <-- safe access with fallback
-        };
+            { category: "Electrical",  items: parsed.Electrical .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Zoning",      items: parsed.Zoning     .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Plumbing",    items: parsed.Plumbing   .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Mechanical",  items: parsed.Mechanical .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+            { category: "Ambiguity",   items: parsed.Ambiguity  .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
+          ].filter(s => s.items.length > 0),
+        }; 
       
         setAnalysis(analysisFormatted);
       } catch (err) {
@@ -142,15 +130,15 @@ export function UploadDrawing() {
   }
 
   return (
-    <section id="upload-drawing" className="w-full py-12 md:py-24 lg:py-32">
+    <section id="upload-drawing" className="w-full py-12 md:py-24 lg:py-32 bg-[var(--background)]">
       <div className="container px-4 md:px-6 mx-auto">
         <div className="flex flex-col items-center space-y-4 text-center mb-12">
           <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-navy-900">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl text-navy-900">
               Upload Your Construction Drawing
             </h2>
             <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
-              Get instant analysis and compliance scoring for your construction permit sets
+              Get instant analysis and compliance scoring for your architectural drawings
             </p>
           </div>
         </div>

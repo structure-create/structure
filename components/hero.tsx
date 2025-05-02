@@ -23,9 +23,11 @@ export function Hero({
 }: {
   setActiveUpload: (value: "permit" | "drawing") => void;
 }) {
-  const handleAnalyzeClick = () => {
-    setActiveUpload("permit");
-    const el = document.getElementById("upload-permit");
+  const handleAnalyzeClick = (type: "permit" | "drawing") => {
+    setActiveUpload(type);
+    const el = document.getElementById(
+      type === "permit" ? "upload-permit" : "upload-drawing"
+    );
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
@@ -57,10 +59,16 @@ export function Hero({
           {/* Call-to-Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center gap-6">
             <button
-              onClick={handleAnalyzeClick}
+              onClick={() => handleAnalyzeClick("permit")}
               className="w-64 bg-[var(--accent)] text-[var(--background)] px-4 py-3 rounded-sm font-semibold text-lg hover:bg-[var(--hovaccent)] transition"
             >
               Analyze Your Building Plan
+            </button>
+            <button
+              onClick={() => handleAnalyzeClick("drawing")}
+              className="w-64 bg-[var(--accent)] text-[var(--background)] px-4 py-3 rounded-sm font-semibold text-lg hover:bg-[var(--hovaccent)] transition"
+            >
+              Analyze Your Drawing
             </button>
             <Link href="/">
               <p className="w-64 block bg-[var(--accent)] text-[var(--background)] px-4 py-3 rounded-sm font-semibold text-lg hover:bg-[var(--hovaccent)] transition">
