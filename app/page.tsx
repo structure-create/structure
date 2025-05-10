@@ -24,7 +24,7 @@ export default function Home() {
       <section className="flex items-center justify-center py-20 md:py-32 bg-[var(--background)] hover:shadow-2xl">
           <div className="container mx-auto px-4">
             <div className="w-[80%] max-w-[1200px] mx-auto p-8 bg-white/5 rounded-3xl transition-all duration-300 hover:bg-white/10 hover:shadow-2xl">
-              <div className="w-full rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02]">
+              <div className="w-full rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[2] border-8 border-[#CD6026] shadow-lg">
                 <video
                   autoPlay
                   muted
