@@ -1,4 +1,3 @@
-
 "use client"
 
 // Home page
@@ -8,9 +7,7 @@ import { Footer } from "@/components/footer";
 import { Features } from "@/components/features";
 import { Intro } from "@/components/intro";
 import Link from "next/link";
-import Image from "next/image";
 import dynamic from "next/dynamic";
-
 
 const FadeIn = dynamic(() => import("@/components/fadein"), {
   ssr: false,    // ← ensures it only loads on the client
@@ -24,15 +21,23 @@ export default function Home() {
         <Intro/>
       </FadeIn>
       <FadeIn>
-      <section className="flex items-center justify-center py-20 md:py-32  bg-[var(--background)]">
-          <Image
-            src="/svgs/demo.svg"
-            alt="Illustration of stacked blocks"
-            width={1000}
-            height={1000}
-            className="object-contain"
-            priority
-          />
+      <section className="flex items-center justify-center py-20 md:py-32 bg-[var(--background)] hover:shadow-2xl">
+          <div className="container mx-auto px-4">
+            <div className="w-[80%] max-w-[1200px] mx-auto p-8 bg-white/5 rounded-3xl transition-all duration-300 hover:bg-white/10 hover:shadow-2xl">
+              <div className="w-full rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[2] border-8 border-[#CD6026] shadow-lg">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-auto -mt-20"
+                >
+                  <source src="/web_demo2.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
       </section>
       </FadeIn>
       <FadeIn>
