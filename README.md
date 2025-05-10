@@ -1,1 +1,1 @@
-# Structure - The Compliance Copilot 
+# Structure - The Compliance Copilot for Architects 
