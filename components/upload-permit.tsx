@@ -41,9 +41,11 @@ export function UploadPermit() {
     if (selectedFile && selectedFile.type === "application/pdf") {
       setFile(selectedFile)
       setError(null)
+      setAnalysis(null); // Clear previous analysis results
     } else {
       setFile(null)
       setError("Please select a valid PDF file")
+      setAnalysis(null); // Clear previous analysis results
     }
   }
 

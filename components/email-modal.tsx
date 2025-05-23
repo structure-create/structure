@@ -43,7 +43,7 @@ export function EmailModal({ isOpen, onClose, onSubmit }: EmailModalProps) {
             </button>
           </div>
           
-          <p className="text-sm text-gray-600 mb-4">Please enter your email address to continue. Limit 3 uploads per email.</p>
+          <p className="text-sm text-gray-600 mb-4">Limit 3 uploads per email.</p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -57,7 +57,7 @@ export function EmailModal({ isOpen, onClose, onSubmit }: EmailModalProps) {
                   setError(null)
                 }}
                 placeholder="your.email@example.com"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 text-gray-500"
               />
               {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
             </div>
