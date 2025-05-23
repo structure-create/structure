@@ -31,27 +31,15 @@ export function UploadDrawing() {
   const [isUploading, setIsUploading] = useState(false)
   const [analysis, setAnalysis] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
-  const [pendingUpload, setPendingUpload] = useState<(() => Promise<void>) | null>(null)
-  const [showEmailModal, setShowEmailModal] = useState(false)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
     if (selectedFile && selectedFile.type === "application/pdf") {
       setFile(selectedFile)
       setError(null)
-      setAnalysis(null); // Clear previous analysis results
     } else {
       setFile(null)
       setError("Please select a valid PDF file")
-      setAnalysis(null); // Clear previous analysis results
-    }
-  }
-
-  const handleEmailSubmit = async (email: string) => {
-    localStorage.setItem('userEmail', email)
-    setShowEmailModal(false)
-    if (pendingUpload) {
-      await pendingUpload()
     }
   }
 
@@ -59,91 +47,6 @@ export function UploadDrawing() {
     e.preventDefault()
 
     if (!file) return
-
-    // Get user's email from localStorage or show modal
-    const userEmail = localStorage.getItem('userEmail')
-    if (!userEmail) {
-      setPendingUpload(async () => {
-        setIsUploading(true)
-        setError(null)
-        try {
-          const arrayBuffer = await file.arrayBuffer()
-          const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise
-          const page = await pdf.getPage(1)
-          const viewport = page.getViewport({ scale: 2 })
-          const canvas = document.createElement("canvas")
-          const context = canvas.getContext("2d")
-          canvas.width = viewport.width
-          canvas.height = viewport.height
-          await page.render({ canvasContext: context!, viewport }).promise
-          const base64Image = canvas.toDataURL("image/jpeg").split(",")[1]
-
-          const emailAfterModal = localStorage.getItem('userEmail'); // Get email again after modal submission
-
-          const response = await fetch("/api/anthropic", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-user-email": emailAfterModal || '' // Use the email from localStorage
-            },
-            body: JSON.stringify({ base64Image }),
-          });
-
-          if (response.status === 429) {
-            const data = await response.text(); // Read as text for 429 errors
-            setError(data || 'Upload limit reached')
-            setIsUploading(false)
-            return
-          }
-
-          if (!response.ok) { // Handle other non-2xx responses
-             const errorData = await response.text();
-             throw new Error(`Upload failed with status ${response.status}: ${errorData}`);
-          }
-
-          const data = await response.json(); // Parse as JSON for successful responses
-          console.log("Response:", data);
-
-          // Clean up raw data and read JSON
-          const raw = data.raw.trim();
-          const cleaned = raw.startsWith("```json") ? raw.slice(7, -3).trim() : raw;
-
-          // Pass into analysis results
-          try {
-            const parsed = JSON.parse(cleaned);
-          
-            // Step 3: Transform to match your AnalysisResults format
-            const analysisFormatted = {
-              score: parsed.complianceScore,
-              issues: [
-                { category: "Electrical",  items: parsed.Electrical .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
-                { category: "Zoning",      items: parsed.Zoning     .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
-                { category: "Plumbing",    items: parsed.Plumbing   .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
-                { category: "Mechanical",  items: parsed.Mechanical .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
-                { category: "Ambiguity",   items: parsed.Ambiguity  .map((i: any) => `"${i.quote}" — ${i.explanation}`) },
-              ].filter(s => s.items.length > 0),
-            }; 
-          
-            setAnalysis(analysisFormatted);
-          } catch (err) {
-            console.error("Failed to parse LLM JSON:", err);
-            setError("There was an error parsing the model's response.");
-          }
-        } catch (err) {
-          console.error("Failed to analyze the PDF. Please try again.")
-          // Safely access the error message
-          if (err instanceof Error) {
-            setError(err.message);
-          } else {
-            setError("An unknown error occurred during analysis.");
-          }
-        } finally {
-          setIsUploading(false)
-        }
-      })
-      setShowEmailModal(true)
-      return
-    }
 
     setIsUploading(true)
     setError(null)
@@ -172,24 +75,10 @@ export function UploadDrawing() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-user-email": userEmail // Include email in header
         },
         body: JSON.stringify({ base64Image }),
       });
-
-      if (response.status === 429) {
-        const data = await response.text(); // Read as text for 429 errors
-        setError(data || 'Upload limit reached')
-        setIsUploading(false)
-        return
-      }
-
-       if (!response.ok) { // Handle other non-2xx responses
-             const errorData = await response.text();
-             throw new Error(`Upload failed with status ${response.status}: ${errorData}`);
-          }
-
-      const data = await response.json(); // Parse as JSON for successful responses
+      const data = await response.json();
       console.log("Response:", data);
 
       // Clean up raw data and read JSON
@@ -233,13 +122,8 @@ export function UploadDrawing() {
       //   setAnalysis(result)
       // }
     } catch (err) {
-      console.error("Failed to analyze the PDF. Please try again.")
-       // Safely access the error message
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError("An unknown error occurred during analysis.");
-        }
+      setError("Failed to analyze the PDF. Please try again.")
+      console.error(err)
     } finally {
       setIsUploading(false)
     }
