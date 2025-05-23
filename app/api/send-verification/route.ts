@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     }
 
     const { data, error } = await resend.emails.send({
-      from: 'Structure <onboarding@resend.dev>',
+      from: 'Structure <noreply@buildstructure.net>',
       to: email,
       subject: 'Your Verification Code',
       html: `
