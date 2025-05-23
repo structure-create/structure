@@ -64,12 +64,12 @@ export function Hero({
             >
               Analyze Your Building Plan
             </button>
-            <button
+            {/* <button
               onClick={() => handleAnalyzeClick("drawing")}
               className="w-64 bg-[var(--accent)] text-[var(--background)] px-4 py-3 rounded-sm font-semibold text-lg hover:bg-[var(--hovaccent)] transition"
             >
               Analyze Your Drawing
-            </button>
+            </button> */}
           </div>
 
           {/* Scroll Indicator */}
