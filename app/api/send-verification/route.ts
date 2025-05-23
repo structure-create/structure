@@ -1,6 +1,21 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
+// Check if we're in production
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Log environment status (without exposing the actual key)
+console.log('Environment:', {
+  nodeEnv: process.env.NODE_ENV,
+  hasResendKey: !!process.env.RESEND_API_KEY,
+  keyLength: process.env.RESEND_API_KEY?.length || 0
+});
+
+if (!process.env.RESEND_API_KEY) {
+  console.error('RESEND_API_KEY is not defined in environment variables');
+  throw new Error('Email service configuration is missing');
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
@@ -10,6 +25,17 @@ export async function POST(request: Request) {
     if (!email || !code) {
       return NextResponse.json(
         { error: 'Email and code are required' },
+        { status: 400 }
+      );
+    }
+
+    console.log('Attempting to send verification email to:', email);
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Invalid email format' },
         { status: 400 }
       );
     }
@@ -32,17 +58,41 @@ export async function POST(request: Request) {
     });
 
     if (error) {
+      console.error('Resend API error:', {
+        error,
+        environment: process.env.NODE_ENV,
+        hasKey: !!process.env.RESEND_API_KEY
+      });
+      
       return NextResponse.json(
-        { error: 'Failed to send verification email' },
+        { 
+          error: 'Failed to send verification email', 
+          details: error,
+          environment: isProduction ? 'production' : 'development'
+        },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ success: true });
+    console.log('Verification email sent successfully');
+    return NextResponse.json({ 
+      success: true, 
+      data,
+      environment: isProduction ? 'production' : 'development'
+    });
   } catch (error) {
-    console.error('Error sending verification email:', error);
+    console.error('Error sending verification email:', {
+      error,
+      environment: process.env.NODE_ENV,
+      hasKey: !!process.env.RESEND_API_KEY
+    });
+    
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Internal server error', 
+        details: error instanceof Error ? error.message : 'Unknown error',
+        environment: isProduction ? 'production' : 'development'
+      },
       { status: 500 }
     );
   }
