@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { analyzePdf } from "@/app/actions"
 import { AnalysisResults } from "./analysis-results"
+import { checkUploadLimit, recordUpload } from "@/lib/supabase"
 
 import * as pdfjsLib from 'pdfjs-dist';
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
@@ -32,27 +33,75 @@ export function UploadPermit() {
   const [isUploading, setIsUploading] = useState(false)
   const [analysis, setAnalysis] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
+  const [email, setEmail] = useState("")
+  const [remainingUploads, setRemainingUploads] = useState<number | null>(null)
+  const [isEmailSubmitted, setIsEmailSubmitted] = useState(false)
+  const [hasReachedLimit, setHasReachedLimit] = useState(false)
+
+  const handleEmailSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) {
+      setError("Please enter your email address")
+      return
+    }
+
+    try {
+      const { canUpload, remainingUploads } = await checkUploadLimit(email)
+      setRemainingUploads(remainingUploads)
+
+      if (!canUpload) {
+        setError(`You have reached your upload limit of 3 files. Please contact support for more uploads.`)
+        setHasReachedLimit(true)
+        return
+      }
+
+      setIsEmailSubmitted(true)
+      setError(null)
+    } catch (err) {
+      console.error("Error checking upload limit:", err)
+      setError("Failed to check upload limit. Please try again.")
+    }
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0]
-    if (selectedFile && selectedFile.type === "application/pdf") {
-      setFile(selectedFile)
-      setError(null)
-    } else {
+    if (!selectedFile) return
+
+    if (selectedFile.type !== "application/pdf") {
       setFile(null)
       setError("Please select a valid PDF file")
+      return
     }
+
+    setFile(selectedFile)
+    setError(null)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!file) return
+    if (!file || !email) return
+
+    // Double check upload limit before proceeding
+    try {
+      const { canUpload } = await checkUploadLimit(email)
+      if (!canUpload) {
+        setError("You have reached your upload limit of 3 files. Please contact support for more uploads.")
+        setHasReachedLimit(true)
+        return
+      }
+    } catch (err) {
+      setError("Failed to verify upload limit. Please try again.")
+      return
+    }
 
     setIsUploading(true)
     setError(null)
 
     try {
+      // Record the upload
+      await recordUpload(email, file.name)
+
       const formData = new FormData()
       formData.append("pdf", file)
 
@@ -91,25 +140,18 @@ export function UploadPermit() {
         };        
       
         setAnalysis(analysisFormatted);
+        // Update remaining uploads
+        setRemainingUploads(prev => {
+          const newCount = prev !== null ? prev - 1 : null
+          if (newCount === 0) {
+            setHasReachedLimit(true)
+          }
+          return newCount
+        })
       } catch (err) {
         console.error("Failed to parse LLM JSON:", err);
         setError("There was an error parsing the model's response.");
       }
-
-      // Old implementation
-      // const result = await analyzePdf(formData)
-
-      // if (
-      //   result.score === 0 &&
-      //   result.issues.length === 1 &&
-      //   (result.issues[0].category.includes("Error") || result.issues[0].category.includes("error"))
-      // ) {
-      //   // This is an error response
-      //   setError(result.issues[0].items[0])
-      //   setAnalysis(null)
-      // } else {
-      //   setAnalysis(result)
-      // }
     } catch (err) {
       setError("Failed to analyze the PDF. Please try again.")
       console.error(err)
@@ -128,48 +170,100 @@ export function UploadPermit() {
           <p className="mx-auto max-w-[700px] text-gray-600 md:text-xl">
             Get instant analysis and compliance scoring for your building plans
           </p>
+          {remainingUploads !== null && (
+            <p className="text-sm text-gray-500">
+              You have {remainingUploads} upload{remainingUploads !== 1 ? 's' : ''} remaining
+            </p>
+          )}
         </div>
 
         <div className="mx-auto max-w-3xl">
           <Card className="border-2 border-dashed border-gray-200 bg-white">
             <CardContent className="p-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              {hasReachedLimit ? (
                 <div className="flex flex-col items-center justify-center space-y-4 py-6">
-                  <div className="rounded-full bg-orange-50 p-4">
-                    <FileText className="h-8 w-8 text-orange-700" />
-                  </div>
                   <div className="space-y-2 text-center">
                     <h3 className="text-lg font-semibold text-orange-900">
-                      Upload your PDF
+                      Upload Limit Reached
                     </h3>
+                    <p className="text-sm text-gray-500">
+                      You have reached your limit of 3 uploads. Please contact support for more uploads.
+                    </p>
                   </div>
-                  <label htmlFor="pdf-upload" className="w-full max-w-sm flex cursor-pointer flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-8 hover:bg-gray-50">
-                    <Upload className="mr-2 h-4 w-4 text-gray-600" />
-                    <span className="text-sm text-gray-600">Select PDF file</span>
-                    <input id="pdf-upload" type="file" accept="application/pdf" onChange={handleFileChange} className="sr-only" />
-                  </label>
-                  {file && (
-                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                      <FileText className="h-4 w-4" />
-                      <span>{file.name}</span>
+                </div>
+              ) : !isEmailSubmitted ? (
+                <form onSubmit={handleEmailSubmit} className="space-y-6">
+                  <div className="flex flex-col items-center justify-center space-y-4 py-6">
+                    <div className="space-y-2 text-center">
+                      <h3 className="text-lg font-semibold text-orange-900">
+                        Enter your email to continue
+                      </h3>
+                      <p className="text-sm text-gray-500">
+                        We'll check your upload limit before proceeding
+                      </p>
                     </div>
-                  )}
-                  {error && <p className="text-sm text-red-500">{error}</p>}
-                </div>
-
-                <div className="flex justify-center">
-                  <Button type="submit" className="bg-orange-700 rounded-sm hover:bg-orange-800 text-white" disabled={!file || isUploading}>
-                    {isUploading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Analyzing...
-                      </>
-                    ) : (
-                      "Analyze Permit"
+                    <div className="w-full max-w-sm">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        className="w-full px-4 py-2 border border-gray-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        required
+                      />
+                    </div>
+                    {error && <p className="text-sm text-red-500">{error}</p>}
+                    <Button 
+                      type="submit" 
+                      className="bg-orange-700 rounded-sm hover:bg-orange-800 text-white"
+                    >
+                      Continue
+                    </Button>
+                  </div>
+                </form>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="flex flex-col items-center justify-center space-y-4 py-6">
+                    <div className="rounded-full bg-orange-50 p-4">
+                      <FileText className="h-8 w-8 text-orange-700" />
+                    </div>
+                    <div className="space-y-2 text-center">
+                      <h3 className="text-lg font-semibold text-orange-900">
+                        Upload your PDF
+                      </h3>
+                    </div>
+                    <label htmlFor="pdf-upload" className="w-full max-w-sm flex cursor-pointer flex-col items-center justify-center rounded-md border border-gray-200 bg-white px-6 py-8 hover:bg-gray-50">
+                      <Upload className="mr-2 h-4 w-4 text-gray-600" />
+                      <span className="text-sm text-gray-600">Select PDF file</span>
+                      <input id="pdf-upload" type="file" accept="application/pdf" onChange={handleFileChange} className="sr-only" />
+                    </label>
+                    {file && (
+                      <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                        <FileText className="h-4 w-4" />
+                        <span>{file.name}</span>
+                      </div>
                     )}
-                  </Button>
-                </div>
-              </form>
+                    {error && <p className="text-sm text-red-500">{error}</p>}
+                  </div>
+
+                  <div className="flex justify-center">
+                    <Button 
+                      type="submit" 
+                      className="bg-orange-700 rounded-sm hover:bg-orange-800 text-white" 
+                      disabled={!file || isUploading}
+                    >
+                      {isUploading ? (
+                        <>
+                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          Analyzing...
+                        </>
+                      ) : (
+                        "Analyze Permit"
+                      )}
+                    </Button>
+                  </div>
+                </form>
+              )}
             </CardContent>
           </Card>
 
