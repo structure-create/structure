@@ -87,14 +87,25 @@ export function UploadPermit() {
         body: JSON.stringify({ email, code }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to send verification email');
+        console.error('Verification email error:', data);
+        throw new Error(
+          data.details?.message || 
+          data.error || 
+          'Failed to send verification email'
+        );
       }
 
       setIsCodeSent(true)
     } catch (err) {
       console.error("Error in email submission:", err)
-      setError("Failed to process your email. Please try again.")
+      setError(
+        err instanceof Error 
+          ? err.message 
+          : "Failed to process your email. Please try again."
+      )
       setIsVerifying(false)
     }
   }
