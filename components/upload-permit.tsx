@@ -8,7 +8,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { analyzePdf } from "@/app/actions"
 import { AnalysisResults } from "./analysis-results"
-import { checkUploadLimit, recordUpload } from "@/lib/supabase"
+import { 
+  checkUploadLimit, 
+  recordUpload, 
+  generateVerificationCode, 
+  verifyCode, 
+  markEmailAsVerified,
+  isEmailVerified 
+} from "@/lib/supabase"
 
 import * as pdfjsLib from 'pdfjs-dist';
 pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.js";
@@ -34,9 +41,12 @@ export function UploadPermit() {
   const [analysis, setAnalysis] = useState<any>(null)
   const [error, setError] = useState<string | null>(null)
   const [email, setEmail] = useState("")
+  const [verificationCode, setVerificationCode] = useState("")
   const [remainingUploads, setRemainingUploads] = useState<number | null>(null)
   const [isEmailSubmitted, setIsEmailSubmitted] = useState(false)
   const [hasReachedLimit, setHasReachedLimit] = useState(false)
+  const [isVerifying, setIsVerifying] = useState(false)
+  const [isCodeSent, setIsCodeSent] = useState(false)
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,6 +56,67 @@ export function UploadPermit() {
     }
 
     try {
+      // Check if email is already verified
+      const verified = await isEmailVerified(email)
+      if (verified) {
+        // If verified, proceed with upload limit check
+        const { canUpload, remainingUploads } = await checkUploadLimit(email)
+        setRemainingUploads(remainingUploads)
+
+        if (!canUpload) {
+          setError(`You have reached your upload limit of 3 files. Please contact support for more uploads.`)
+          setHasReachedLimit(true)
+          return
+        }
+
+        setIsEmailSubmitted(true)
+        setError(null)
+        return
+      }
+
+      // If not verified, send verification code
+      setIsVerifying(true)
+      const code = await generateVerificationCode(email)
+      
+      // Send verification code via email
+      const response = await fetch('/api/send-verification', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, code }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send verification email');
+      }
+
+      setIsCodeSent(true)
+    } catch (err) {
+      console.error("Error in email submission:", err)
+      setError("Failed to process your email. Please try again.")
+      setIsVerifying(false)
+    }
+  }
+
+  const handleVerificationSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!verificationCode) {
+      setError("Please enter the verification code")
+      return
+    }
+
+    try {
+      const isValid = await verifyCode(email, verificationCode)
+      if (!isValid) {
+        setError("Invalid verification code. Please try again.")
+        return
+      }
+
+      // Mark email as verified
+      await markEmailAsVerified(email)
+
+      // Check upload limit
       const { canUpload, remainingUploads } = await checkUploadLimit(email)
       setRemainingUploads(remainingUploads)
 
@@ -58,8 +129,8 @@ export function UploadPermit() {
       setIsEmailSubmitted(true)
       setError(null)
     } catch (err) {
-      console.error("Error checking upload limit:", err)
-      setError("Failed to check upload limit. Please try again.")
+      console.error("Error in verification:", err)
+      setError("Failed to verify your email. Please try again.")
     }
   }
 
@@ -192,32 +263,47 @@ export function UploadPermit() {
                   </div>
                 </div>
               ) : !isEmailSubmitted ? (
-                <form onSubmit={handleEmailSubmit} className="space-y-6">
+                <form onSubmit={isVerifying ? handleVerificationSubmit : handleEmailSubmit} className="space-y-6">
                   <div className="flex flex-col items-center justify-center space-y-4 py-6">
                     <div className="space-y-2 text-center">
                       <h3 className="text-lg font-semibold text-orange-900">
-                        Enter your email to continue
+                        {isVerifying ? "Enter Verification Code" : "Enter your email to continue"}
                       </h3>
                       <p className="text-sm text-gray-500">
-                        We'll check your upload limit before proceeding
+                        {isVerifying 
+                          ? "Please enter the verification code sent to your email"
+                          : "We'll verify your email before proceeding"}
                       </p>
                     </div>
-                    <div className="w-full max-w-sm">
-                      <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
-                        className="w-full px-4 py-2 border border-gray-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
-                        required
-                      />
-                    </div>
+                    {!isVerifying ? (
+                      <div className="w-full max-w-sm">
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Enter your email"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                          required
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full max-w-sm">
+                        <input
+                          type="text"
+                          value={verificationCode}
+                          onChange={(e) => setVerificationCode(e.target.value)}
+                          placeholder="Enter verification code"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                          required
+                        />
+                      </div>
+                    )}
                     {error && <p className="text-sm text-red-500">{error}</p>}
                     <Button 
                       type="submit" 
                       className="bg-orange-700 rounded-sm hover:bg-orange-800 text-white"
                     >
-                      Continue
+                      {isVerifying ? "Verify Code" : "Continue"}
                     </Button>
                   </div>
                 </form>
