@@ -129,7 +129,12 @@ export function UploadDrawing() {
           }
         } catch (err) {
           console.error("Failed to analyze the PDF. Please try again.")
-          setError(err.message)
+          // Safely access the error message
+          if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError("An unknown error occurred during analysis.");
+          }
         } finally {
           setIsUploading(false)
         }
@@ -226,8 +231,13 @@ export function UploadDrawing() {
       //   setAnalysis(result)
       // }
     } catch (err) {
-      setError("Failed to analyze the PDF. Please try again.")
-      console.error(err)
+      console.error("Failed to analyze the PDF. Please try again.")
+       // Safely access the error message
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred during analysis.");
+        }
     } finally {
       setIsUploading(false)
     }
