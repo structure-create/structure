@@ -14,25 +14,25 @@ export function Intro() {
                      md:mr-[-8rem] lg:mr-[-12rem] "
         >
         <div className = "gap-12">
-        <p className = "text-5xl sm:text-6xl md:text-8xl leading-tight">
-            Drawings to approvals. Faster.
+        <p className="text-5xl sm:text-6xl md:text-8xl leading-tight">
+          Drawings to approvals. Faster.
         </p>
           <h3 className="mt-4">
             Quality control and compliance tool<br></br>for architects.
           </h3>
-          <div className="mt-6 flex flex-wrap gap-4">
+            <div className="mt-6 flex flex-wrap gap-4">
             <Link href="/demo">
-              <p className="px-6 py-3 bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-sm">
-                Try a demo
+              <p className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-sm">
+              Try a demo
               </p>
             </Link>
             <Link href="https://cal.com/arnavashah/30min">
-              <p className="px-6 py-3 bg-[#FDE0CA] hover:bg-[#FFC3A5] text-[#CD6026] rounded-sm">
-                Get Started
+              <p className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base bg-[#FDE0CA] hover:bg-[#FFC3A5] text-[#CD6026] rounded-sm">
+              Get Started
               </p>
             </Link>
-          </div>
-          </div>
+            </div>
+        </div>
     </div>
 
         {/* SVG SIDE */}
@@ -52,7 +52,7 @@ export function Intro() {
             md:-mt-32 lg:-mt-40                /* pull up */
             "
         >
-        <p className="text-6xl">
+        <p className="text-5xl sm:text-6xl md:text-8xl leading-tight mt-16 sm:mt-0">
             Construction moves <br /> fast, permits don’t.
         </p>
         <h4 className="max-w-2xl">

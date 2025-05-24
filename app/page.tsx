@@ -21,7 +21,7 @@ export default function Home() {
         <Intro/>
       </FadeIn>
       <FadeIn>
-      <section className="flex items-center justify-center py-20 md:py-32 bg-[var(--background)] hover:shadow-2xl">
+      <section className="flex items-center justify-center py-20 md:py-32 bg-[var(--background)] hover:shadow-2xl max-sm:hidden">
           <div className="container mx-auto px-4">
             <div className="w-2/5 mx-auto p-8 bg-white/5 rounded-3xl transition-all duration-300 hover:bg-white/10 hover:shadow-2xl">
               <div className="w-full aspect-[16/9] rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[2] border-8 border-[#CD6026] shadow-lg">

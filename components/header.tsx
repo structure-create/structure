@@ -18,39 +18,39 @@ export function Header() {
       <div className="flex items-center gap-6">
         <Link href="/">
           <img
-            src="/svgs/structure_word_logo.svg"
-            alt="Structure Logo"
-            className="h-10 w-auto"
+        src="/svgs/structure_word_logo.svg"
+        alt="Structure Logo"
+        className="h-10 w-auto max-sm:h-7"
           />
         </Link>
       </div>
 
       {/* Buttons */}
-      <div className="flex items-center space-x-1">
+      <div className="flex items-center space-x-1 max-sm:hidden">
         <Link href="/contactus">
           <button
-            className="flex items-center space-x-2
-                      bg-[var(--background)] text-[#CD6026]
-                      text-sm px-5 py-2 rounded-sm
-                      hover:bg-[var(--card)] transition"
+        className="flex items-center space-x-2
+              bg-[var(--background)] text-[#CD6026]
+              text-sm px-5 py-2 rounded-sm
+              hover:bg-[var(--card)] transition"
           >
-            CONTACT US
+        CONTACT US
           </button>
         </Link>
 
         <Link href="/demo">
           <button
-            className="flex items-center space-x-2
-                      bg-[var(--background)] text-[#CD6026]
-                      text-sm px-5 py-2 rounded-sm
-                      hover:bg-[var(--card)] transition"
+        className="flex items-center space-x-2
+              bg-[var(--background)] text-[#CD6026]
+              text-sm px-5 py-2 rounded-sm
+              hover:bg-[var(--card)] transition"
           >
-            <span>TRY A DEMO</span>
-            <img
-              src="/svgs/arrow.svg"
-              alt="→"
-              className="h-4 w-auto"
-            />
+        <span>TRY A DEMO</span>
+        <img
+          src="/svgs/arrow.svg"
+          alt="→"
+          className="h-4 w-auto"
+        />
           </button>
         </Link>
       </div>

@@ -34,9 +34,9 @@ export function Footer() {
         </div>
 
         {/* Right block */}
-        <div className="text-sm flex flex-col items-end gap-6 text-right ">
-        <p className="font-bold text-white">For architects, by innovators</p>
-          <p className="text-white">
+        <div className="text-sm flex flex-col gap-6 text-left md:items-end md:text-right md:mt-0 mt-8">
+          <p className="font-bold text-white text-left md:text-right">For architects, by innovators</p>
+          <p className="text-white text-left md:text-right">
             Built in Los Angeles, California
           </p>
         </div>
@@ -48,9 +48,9 @@ export function Footer() {
         md:gap-x-24 md:gap-y text-right
         `}>
           <p className="text-md"></p>
-          <div className="text-sm flex flex-col items-end gap-6 text-right">
-            <p className="text-md text-white">© {new Date().getFullYear()} Structure</p>
-          </div>
+            <div className="text-xs text-white text-left md:text-right">
+            © {new Date().getFullYear()} Structure
+            </div>
         </div>
     </footer>
   );
