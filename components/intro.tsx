@@ -22,13 +22,13 @@ export function Intro() {
           </h3>
             <div className="mt-6 flex flex-wrap gap-4">
             <Link href="/demo">
-              <p className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-sm">
-              Try a demo
+              <p className="px-6 py-3 text-base sm:px-8 sm:py-4 sm:text-lg md:px-12 md:py-6 md:text-2xl bg-[#CD6026] hover:bg-[#A13E0A] text-white rounded-sm">
+                Try a demo
               </p>
             </Link>
             <Link href="https://cal.com/arnavashah/30min">
-              <p className="px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base bg-[#FDE0CA] hover:bg-[#FFC3A5] text-[#CD6026] rounded-sm">
-              Get Started
+              <p className="px-6 py-3 text-base sm:px-8 sm:py-4 sm:text-lg md:px-12 md:py-6 md:text-2xl bg-[#FDE0CA] hover:bg-[#FEC3A5] text-[#CD6026] rounded-sm">
+                Get Started
               </p>
             </Link>
             </div>
@@ -44,22 +44,24 @@ export function Intro() {
           />
         </div>
       </div>
-        {/* secondary callout */}
-        <div
-            className="
-            space-y-16
-            relative z-20
-            md:-mt-32 lg:-mt-40                /* pull up */
-            "
-        >
-        <p className="text-5xl sm:text-6xl md:text-8xl leading-tight mt-16 sm:mt-0">
-            Construction moves <br /> fast, permits don’t.
+      {/* secondary callout */}
+      <div
+        className="
+          space-y-16
+          relative z-20
+          md:-mt-32 lg:-mt-40                /* pull up */
+          md:ml-0 md:mr-auto                 /* align left on md+ */
+          md:max-w-3xl                       /* limit width on md+ */
+        "
+      >
+        <p className="text-5xl sm:text-6xl md:text-8xl mt-16">
+          Construction moves fast, <br /> permits don’t.
         </p>
         <h4 className="max-w-2xl">
-            Structure highlights code violations, grades your drawings on compliance,
-            and allows teammates to leave comments and suggestions.
+          Structure highlights code violations, grades your drawings on compliance,
+          and allows teammates to leave comments and suggestions.
         </h4>
-    </div>
+      </div>
     </section>
   )
 }
