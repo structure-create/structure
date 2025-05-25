@@ -15,12 +15,12 @@ export function Footer() {
             <img
               src="/svgs/word.svg"
               alt="Structure Logo"
-              className="h-7 w-auto"
+              className="h-7 w-auto max-sm:h-4"
             />
           </Link>
           <div className="flex items-center gap-6">
             <Link href="mailto:structure.create@gmail.com" aria-label="Email">
-              <img src="/svgs/mail.svg" alt="Email" className="h-5 w-auto" />
+              <img src="/svgs/mail.svg" alt="Email" className="h-5 w-auto max-sm:h-4" />
             </Link>
             <Link
               href="https://www.linkedin.com/company/build-at-structure/"
@@ -28,15 +28,15 @@ export function Footer() {
               rel="noopener noreferrer"
               aria-label="LinkedIn"
             >
-              <img src="/svgs/linkedin.svg" alt="LinkedIn" className="h-5 w-auto" />
+              <img src="/svgs/linkedin.svg" alt="LinkedIn" className="h-5 w-auto max-sm:h-4" />
             </Link>
           </div>
         </div>
 
         {/* Right block */}
-        <div className="text-sm flex flex-col gap-6 text-left md:items-end md:text-right md:mt-0 mt-8">
-          <p className="font-bold text-white text-left md:text-right">For architects, by innovators</p>
-          <p className="text-white text-left md:text-right">
+        <div className="text-sm max-sm:text-sm flex flex-col gap-6 text-left md:items-end md:text-right md:mt-0 mt-8">
+          <p className="font-bold text-white text-left md:text-right max-sm:text-sm">For architects, by innovators</p>
+          <p className="text-white text-left md:text-right max-sm:text-sm">
             Built in Los Angeles, California
           </p>
         </div>
