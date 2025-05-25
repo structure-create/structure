@@ -6,6 +6,7 @@ import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
 import { Features } from "@/components/features";
 import { Intro } from "@/components/intro";
+import { Faq } from "@/components/faq";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
@@ -42,6 +43,12 @@ export default function Home() {
       </FadeIn>
       <FadeIn>
         <Features />
+      </FadeIn>
+      <FadeIn>
+        <div className="max-sm:hidden">
+          {/* Uncomment when completed */}
+          {/* <Faq />  */}
+        </div>
       </FadeIn>
           <h1 className="inline-block h-[200px] mx-auto text-5xl md:text-7xl font-extrabold leading-tight text-[var(--background)]"> .
           </h1>
