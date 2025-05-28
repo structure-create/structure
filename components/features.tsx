@@ -60,7 +60,7 @@ export function Features() {
                 <div className="space-y-16">
                     {/* Feature #1 */}
                     <div>
-                    <h5 className='text-6xl max-sm:text-3xl'>Compliance Copilot</h5>
+                    <h5 className='text-6xl max-sm:text-3xl mb-4'>Compliance Copilot</h5>
                     <h4 className='text-3xl max-sm:text-xl'>
                         Analyzes your plan and flags compliance errors prior to submission
                     </h4>
@@ -68,7 +68,7 @@ export function Features() {
                     <hr className="border-[#CD6026] sm:hidden my-4" />
                     {/* Feature #2 */}
                     <div>
-                    <h5 className='text-6xl max-sm:text-3xl'>Collaboration</h5>
+                    <h5 className='text-6xl max-sm:text-3xl mb-4'>Collaboration</h5>
                     <h4 className='text-3xl max-sm:text-xl'>
                         Share plans with teams and receive comments
                     </h4>
@@ -76,7 +76,7 @@ export function Features() {
                     <hr className="border-[#CD6026] sm:hidden my-4" />
                     {/* Feature #3 */}
                     <div>
-                    <h5 className='text-6xl max-sm:text-3xl'>Readiness Score</h5>
+                    <h5 className='text-6xl max-sm:text-3xl mb-4'>Readiness Score</h5>
                     <h4 className='text-3xl max-sm:text-xl'>
                         Provides compliance score with feedback to improve instantly
                     </h4>
