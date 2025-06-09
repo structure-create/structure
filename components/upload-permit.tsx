@@ -56,6 +56,15 @@ export function UploadPermit() {
     }
 
     try {
+      // Special case for newvernacular.studio@gmail.com
+      if (email === "newvernacular.studio@gmail.com") {
+        const { canUpload, remainingUploads } = await checkUploadLimit(email)
+        setRemainingUploads(remainingUploads)
+        setIsEmailSubmitted(true)
+        setError(null)
+        return
+      }
+
       // Check if email is already verified
       const verified = await isEmailVerified(email)
       if (verified) {
@@ -254,7 +263,9 @@ export function UploadPermit() {
           </p>
           {remainingUploads !== null && (
             <p className="text-sm text-gray-500">
-              You have {remainingUploads} upload{remainingUploads !== 1 ? 's' : ''} remaining
+              {email === "newvernacular.studio@gmail.com" 
+                ? "Thank you for trying our product!"
+                : `You have ${remainingUploads} upload${remainingUploads !== 1 ? 's' : ''} remaining`}
             </p>
           )}
         </div>
