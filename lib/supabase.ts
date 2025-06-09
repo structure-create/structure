@@ -11,6 +11,11 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Function to check upload limit for an email
 export async function checkUploadLimit(email: string): Promise<{ canUpload: boolean; remainingUploads: number }> {
+  // Special case for newvernacular.studio@gmail.com
+  if (email === "newvernacular.studio@gmail.com") {
+    return { canUpload: true, remainingUploads: Infinity };
+  }
+
   const { data: uploads, error } = await supabase
     .from('uploads')
     .select('*')
