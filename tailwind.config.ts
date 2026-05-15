@@ -10,8 +10,9 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        montreal: ["PPNeueMontreal-Book", "serif"],
-        montrealMedium: ["PPNeueMontreal-Book", "serif"],
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        montreal: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        montrealMedium: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

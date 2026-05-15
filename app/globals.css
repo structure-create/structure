@@ -2,100 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
-/* Define fonts */
-@font-face {
-  font-family: 'PPNeueMontreal-Book';
-  src: url('/fonts/PPNeueMontreal-Book.otf') format('opentype'); 
-  font-style: normal;
-}
-
-/* Define variables */
 @layer base {
   :root {
-    /* Background color */
-    --background: #FAF9F6; 
-    /* Text color */
-    --foreground: #000000;
-    /* Box color */
-    --card: #F4F4F6;
-    /* Button, Logo color */
-    --accent: #CD6026;
-    /* light logo color */
-    --lightaccent: #FDE0CA;
-    /* Placeholder text */
-    --placeholder: #B8B8B8;
-    /* Border color */
-    --border: #C1C1C1;
-
-    /* Hover Colors */
-    --hovaccent: #A13E0A;
-    --lighthovaaccent: #FFC3A5;
-  }
-  
-  h1 {
-    color: #333;
-    font-family: "PPNeueMontreal-Book";
-    font-size: 2m;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100px;
+    --brand:       #C1622A;
+    --brand-light: #F5E6DC;
+    --brand-dark:  #8C3E16;
+    --bg:          #FAFAF9;
+    --surface:     #FFFFFF;
+    --ink:         #0F0F0E;
+    --ink-2:       #3A3A38;
+    --ink-3:       #6B6B6B;
+    --border:      #E5E2DC;
+    --error:       #E8645A;
+    --error-light: #FDF0EF;
   }
 
-  h2 {
-    color: #333;
-    font-family: 'PPNeueMontreal-Book';
-    font-size: 48px;
-    color: var(--foreground); 
-  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  h3 {
-    color: #333;
-    font-family: 'PPNeueMontreal-Book', serif;
-    font-weight: normal;
-    font-size: 36px;
-  }
+  html { scroll-behavior: smooth; }
 
-  h4 {
-    color: #333;
-    font-family: 'PPNeueMontreal-Book', serif;
-    font-weight: normal;
-    font-size: 32px;
-  }
-
-  h5 {
-    color: #333;
-    font-family: 'PPNeueMontreal-Book', serif;
-    font-weight: normal;
-    font-size: 64px;
-  }
-
-  p {
-    color: #333;
-    font-family: 'PPNeueMontreal-Book', serif;
-    font-weight: 400px;
-    font-size: 24px;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
   body {
-    font-family: 'PPNeueMontreal-Book', serif;
-    @apply bg-background text-foreground;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    letter-spacing: -0.011em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: auto;
   }
+
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
 }
 
 @layer utilities {
-  .row-start-1 { grid-row-start: 1; }
-  .row-start-2 { grid-row-start: 2; }
-  .col-start-1 { grid-column-start: 1; }
-  .col-start-2 { grid-column-start: 2; }
+  .text-balance { text-wrap: balance; }
+
+  @media (max-width: 540px) {
+    .hiw-step-row {
+      grid-template-columns: 1fr !important;
+    }
+  }
 }

@@ -1,7 +1,15 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import Head from 'next/head'
 import { CognitoProvider } from "@/contexts/AuthProvider";
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-sans',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Structure',
@@ -18,7 +26,9 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body className="bg-[#FAF9F6]"><CognitoProvider>{children}</CognitoProvider></body>
+      <body className={`${inter.variable} ${inter.className} bg-[#FAF9F6]`}>
+        <CognitoProvider>{children}</CognitoProvider>
+      </body>
     </html>
   )
 }
