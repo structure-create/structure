@@ -1174,9 +1174,9 @@ export default function App() {
         <ScrollProgressBar />
         <Nav />
         <Hero />
-        <HowItWorks />
         <ProblemSection />
         <Features />
+        <HowItWorks />
         <MeetTheTeam />
         <ClosingCTA />
         <Footer />
