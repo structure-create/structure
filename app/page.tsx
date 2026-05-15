@@ -13,10 +13,10 @@ const CLIPS = [
   "/feature-clips/collab.mp4",
 ]
 const TEAM = [
-  { photo: "/team/arnav.png",  name: "Arnav Shah",    role: "PM",        linkedin: "https://www.linkedin.com/in/arnav-ashah/"  },
-  { photo: "/team/olivia.png", name: "Olivia Nazari", role: "Designer",  linkedin: "https://www.linkedin.com/in/olivia-nazari/" },
-  { photo: "/team/sonya.png",  name: "Sonya Alexis",  role: "Developer", linkedin: "https://www.linkedin.com/in/sonya-alexis/"  },
-  { photo: "/team/rida.png",   name: "Rida Faraz",    role: "Developer", linkedin: "https://www.linkedin.com/in/rida-faraz/"    },
+  { photo: "/team/arnav.png",  name: "Arnav Shah",    role: "Strategy & Growth",        linkedin: "https://www.linkedin.com/in/arnav-ashah/"  },
+  { photo: "/team/olivia.png", name: "Olivia Nazari", role: "Brand & Design",  linkedin: "https://www.linkedin.com/in/olivia-nazari/" },
+  { photo: "/team/sonya.png",  name: "Sonya Alexis",  role: "Applied AI", linkedin: "https://www.linkedin.com/in/sonya-alexis/"  },
+  { photo: "/team/rida.png",   name: "Rida Faraz",    role: "Machine Learning", linkedin: "https://www.linkedin.com/in/rida-faraz/"    },
 ]
 const STEPS = [
   { n: "01", title: "Configure Projects by Jurisdiction", desc: "Select a municipality and Structure automatically loads the relevant building codes, zoning rules, and permitting requirements for that location." },
