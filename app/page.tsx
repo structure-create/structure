@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect, type CSSProperties } from "react"
 import { motion, AnimatePresence, useScroll, useInView, useTransform } from "framer-motion"
-import { Paperclip, ArrowUp } from "lucide-react"
+import { Paperclip, ArrowUp, Menu, X } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 // ── Asset paths ───────────────────────────────────────────────────────────────
 const LOGO  = "/svgs/structure_word_logo.svg"
@@ -104,10 +105,15 @@ function ScrollProgressBar() {
 
 // ── Nav ───────────────────────────────────────────────────────────────────────
 function Nav() {
-  const [scrolled, setScrolled] = useState(false)
-  const { scrollY }             = useScroll()
+  const [scrolled, setScrolled]   = useState(false)
+  const [menuOpen, setMenuOpen]   = useState(false)
+  const { scrollY }               = useScroll()
+  const isMobile                  = useIsMobile()
 
-  useEffect(() => scrollY.on("change", v => setScrolled(v > 60)), [scrollY])
+  useEffect(() => scrollY.on("change", v => {
+    setScrolled(v > 60)
+    if (v > 100) setMenuOpen(false)
+  }), [scrollY])
 
   const links = [
     { label: "How it works", href: "#how-it-works" },
@@ -118,9 +124,9 @@ function Nav() {
   return (
     <nav style={{
       position: "sticky", top: 0, zIndex: 100,
-      background: scrolled ? "rgba(255,255,255,0.97)" : "transparent",
-      borderBottom: `1px solid ${scrolled ? "var(--border)" : "transparent"}`,
-      backdropFilter: scrolled ? "blur(12px)" : "none",
+      background: scrolled || menuOpen ? "rgba(255,255,255,0.97)" : "transparent",
+      borderBottom: `1px solid ${scrolled || menuOpen ? "var(--border)" : "transparent"}`,
+      backdropFilter: scrolled || menuOpen ? "blur(12px)" : "none",
       transition: "background 0.3s, border-color 0.3s",
     }}>
       <div style={{
@@ -132,19 +138,59 @@ function Nav() {
           <img src={LOGO} alt="Structure" style={{ height: "1.75rem", width: "auto" }} />
         </a>
 
-        <div style={{ display: "flex", gap: "clamp(1.5rem,3vw,2.5rem)", alignItems: "center" }}>
-          {links.map(l => (
-            <a key={l.label} href={l.href} style={{
-              fontFamily: SANS, fontSize: "clamp(0.875rem,1.2vw,0.9375rem)", fontWeight: 400,
-              color: "var(--ink-2)", textDecoration: "none", transition: "color 0.15s",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.color = "var(--ink)")}
-            onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-2)")}>
-              {l.label}
-            </a>
-          ))}
-        </div>
+        {/* Desktop links */}
+        {!isMobile && (
+          <div style={{ display: "flex", gap: "clamp(1.5rem,3vw,2.5rem)", alignItems: "center" }}>
+            {links.map(l => (
+              <a key={l.label} href={l.href} style={{
+                fontFamily: SANS, fontSize: "clamp(0.875rem,1.2vw,0.9375rem)", fontWeight: 400,
+                color: "var(--ink-2)", textDecoration: "none", transition: "color 0.15s",
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = "var(--ink)")}
+              onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-2)")}>
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
+
+        {/* Mobile hamburger */}
+        {isMobile && (
+          <button
+            onClick={() => setMenuOpen(o => !o)}
+            style={{ background: "none", border: "none", cursor: "pointer", padding: "0.375rem", color: "var(--ink)", display: "flex", alignItems: "center" }}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        )}
       </div>
+
+      {/* Mobile dropdown */}
+      <AnimatePresence>
+        {isMobile && menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18 }}
+            style={{
+              borderTop: "1px solid var(--border)",
+              padding: "1.25rem 1.5rem 1.5rem",
+              display: "flex", flexDirection: "column", gap: "1.25rem",
+            }}
+          >
+            {links.map(l => (
+              <a key={l.label} href={l.href}
+                onClick={() => setMenuOpen(false)}
+                style={{ fontFamily: SANS, fontSize: "1.0625rem", fontWeight: 400, color: "var(--ink-2)", textDecoration: "none" }}
+              >
+                {l.label}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }
@@ -588,6 +634,7 @@ function HowItWorks() {
     target: sectionRef,
     offset: ["start start", "end end"],
   })
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const unsub = scrollYProgress.on("change", v => {
@@ -597,37 +644,70 @@ function HowItWorks() {
     return unsub
   }, [scrollYProgress])
 
+  const SectionIntro = () => (
+    <div style={{
+      textAlign: "center",
+      padding: "clamp(3rem,6vw,5rem) clamp(1rem,4vw,2rem) clamp(2rem,4vw,3rem)",
+    }}>
+      <div style={{
+        display: "inline-flex", alignItems: "center", gap: "0.5rem",
+        marginBottom: "clamp(1rem,2vw,1.5rem)",
+      }}>
+        <div style={{ height: "1px", width: "1.5rem", background: "var(--border)" }} />
+        <span style={{ fontFamily: SANS, fontSize: "clamp(0.7rem,1vw,0.75rem)", fontWeight: 600, color: "var(--brand)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          How it works
+        </span>
+        <div style={{ height: "1px", width: "1.5rem", background: "var(--border)" }} />
+      </div>
+      <h2 style={{
+        fontFamily: SERIF, fontWeight: 500,
+        fontSize: "clamp(2.15rem,4.6vw,3.6rem)",
+        color: "var(--ink)", lineHeight: 1.05,
+        letterSpacing: "-0.02em",
+        maxWidth: "18ch", margin: "0 auto clamp(2rem,4vw,3rem)",
+      }}>
+        From upload to approval-ready in minutes.
+      </h2>
+    </div>
+  )
+
+  if (isMobile) {
+    return (
+      <section id="how-it-works" style={{ background: "var(--bg)", position: "relative", borderBottom: "1px solid var(--border)" }}>
+        <GridOverlay />
+        <SectionIntro />
+        <div style={{ padding: "0 1rem 3rem" }}>
+          {STEPS.map((step, i) => (
+            <div key={i} style={{
+              borderTop: "1px solid var(--border)",
+              paddingTop: "2rem",
+              paddingBottom: "2.5rem",
+            }}>
+              <div style={{ fontFamily: SANS, fontSize: "0.7rem", fontWeight: 600, color: "var(--brand)", letterSpacing: "0.12em", textTransform: "uppercase", marginBottom: "0.5rem" }}>
+                Step {step.n}
+              </div>
+              <h3 style={{ fontFamily: SERIF, fontWeight: 500, fontSize: "1.5rem", color: "var(--ink)", lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "0.75rem" }}>
+                {step.title}
+              </h3>
+              <p style={{ fontFamily: SANS, fontSize: "0.9375rem", color: "var(--ink-2)", lineHeight: 1.8, marginBottom: "1.25rem" }}>
+                {step.desc}
+              </p>
+              <div style={{ ...hiwVideoFrame }}>
+                <video src={CLIPS[i]} muted loop playsInline autoPlay style={{ width: "100%", display: "block" }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section id="how-it-works" style={{ background: "var(--bg)", position: "relative", borderBottom: "1px solid var(--border)" }}>
       <GridOverlay />
-      {/* Centered intro */}
-      <div style={{
-        textAlign: "center",
-        padding: "clamp(3rem,6vw,5rem) clamp(1rem,4vw,2rem) clamp(2rem,4vw,3rem)",
-      }}>
-        <div style={{
-          display: "inline-flex", alignItems: "center", gap: "0.5rem",
-          marginBottom: "clamp(1rem,2vw,1.5rem)",
-        }}>
-          <div style={{ height: "1px", width: "1.5rem", background: "var(--border)" }} />
-          <span style={{ fontFamily: SANS, fontSize: "clamp(0.7rem,1vw,0.75rem)", fontWeight: 600, color: "var(--brand)", letterSpacing: "0.12em", textTransform: "uppercase" }}>
-            How it works
-          </span>
-          <div style={{ height: "1px", width: "1.5rem", background: "var(--border)" }} />
-        </div>
-        <h2 style={{
-          fontFamily: SERIF, fontWeight: 500,
-          fontSize: "clamp(2.15rem,4.6vw,3.6rem)",
-          color: "var(--ink)", lineHeight: 1.05,
-          letterSpacing: "-0.02em",
-          maxWidth: "18ch", margin: "0 auto clamp(2rem,4vw,3rem)",
-        }}>
-          From upload to approval-ready in minutes.
-        </h2>
+      <SectionIntro />
 
-      </div>
-
-      {/* Sticky scroll — always on */}
+      {/* Sticky scroll */}
       <div ref={sectionRef} style={{ height: "600vh", position: "relative", padding: "0 clamp(0.75rem,2vw,2rem)" }}>
         <div style={{
           position: "sticky",
@@ -884,10 +964,12 @@ function Features() {
     </div>
   )
 
+  const isMobile = useIsMobile()
+
   const ROW: CSSProperties = {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "clamp(2rem,5vw,5rem)",
+    gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+    gap: isMobile ? "1.5rem" : "clamp(2rem,5vw,5rem)",
     alignItems: "center",
   }
   const TEXT: CSSProperties = {
@@ -898,7 +980,7 @@ function Features() {
     <section id="features" style={{ background: "var(--bg)", borderTop: "1px solid var(--border)", padding: "clamp(4rem,8vw,7rem) clamp(1rem,4vw,2rem)" }}>
       <div style={{ maxWidth: "72rem", margin: "0 auto", display: "flex", flexDirection: "column", gap: "clamp(4rem,8vw,6rem)" }}>
 
-        {/* Row 1 — text left, card right */}
+        {/* Row 1 — text left, card right (on mobile: text top, card bottom) */}
         <motion.div ref={ref1} style={ROW}
           initial={{ opacity: 0, y: 24 }} animate={inView1 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, ease: E }}>
@@ -914,7 +996,7 @@ function Features() {
           <FlagCard />
         </motion.div>
 
-        {/* Row 2 — card left, text right */}
+        {/* Row 2 — card left, text right (on mobile: card top, text bottom) */}
         <motion.div ref={ref2} style={ROW}
           initial={{ opacity: 0, y: 24 }} animate={inView2 ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, ease: E }}>
@@ -1058,6 +1140,7 @@ function ClosingCTA() {
 
 // ── Footer ────────────────────────────────────────────────────────────────────
 function Footer() {
+  const isMobile = useIsMobile()
   const product = [
     { label: "How it works", href: "#how-it-works" },
   ]
@@ -1076,8 +1159,8 @@ function Footer() {
         maxWidth: "min(92vw, 76rem)", margin: "0 auto",
         padding: "clamp(3rem,6vw,5rem) 0",
         display: "grid",
-        gridTemplateColumns: "2fr 1fr 1fr",
-        gap: "clamp(2rem,5vw,4rem)",
+        gridTemplateColumns: isMobile ? "1fr" : "2fr 1fr 1fr",
+        gap: isMobile ? "2rem" : "clamp(2rem,5vw,4rem)",
         alignItems: "start",
       }}>
         {/* Brand */}
